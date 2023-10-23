@@ -22,14 +22,13 @@
                 </button>
             </form>
             @else
-            <form action="{{action([App\Http\Controllers\CatalogController::class, 'putRent'], ['id' => $pelicula->id])}}" 
-                method="POST" style="display:inline">
-                @method('PUT')
+            <form action="{{ route('payment.show', ['id' => $pelicula->id]) }}" method="GET" style="display:inline">
                 @csrf
                 <button type="submit" class="btn btn-primary" style="display:inline">
                     Alquilar película
                 </button>
-            </form>                
+            </form>
+                            
             @endif
             <a class="btn btn-warning" href="/catalog/edit/{{$pelicula->id}}">Editar pelicula</a>
             <a type="button" class="btn btn-dark" href="/catalog">Volver al listado</a>
