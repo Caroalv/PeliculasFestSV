@@ -16,28 +16,25 @@ class PaymentController extends Controller
     // Método para procesar el pago
     public function processPayment(Request $request)
     {
-        // Lógica de procesamiento de pago aquí...
-        // Aquí puedes integrar una pasarela de pago como Stripe o PayPal.
+        // Aquí puedes integrar una pasarela de pago 
 
         // Supongamos que el pago fue exitoso.
         // Obtén la película y duración seleccionada
         $duration = $request->input('duration');
         $pelicula = Movie::find($request->input('pelicula_id'));
 
-        // Simulemos un pago exitoso y actualicemos el estado de la película a "alquilada"
+        // Simulamos un pago exitoso y actualizamos el estado de la película a "alquilada"
         if ($this->processPaymentLogic()) {
             $pelicula->update(['rented' => 1]);
             return redirect()->route('catalog.show', $pelicula->id);
         } else {
-            return redirect()->route('catalog.show', $pelicula->id)->with('error', 'El pago no se pudo procesar. Por favor, intenta de nuevo.');
+            return redirect()->route('catalog.show', $pelicula->id)->with('error', 'El pago no se pudo procesar. Por favor, inténtalo de nuevo.');
         }
     }
 
-    // Método para simular la lógica de procesamiento de pago (debes implementar tu propia lógica real)
+    // Método para simular la lógica de procesamiento de pago
     private function processPaymentLogic()
     {
-        // Aquí debes implementar la lógica de procesamiento de pago real
-        // Esto es solo una simulación.
         return true; // Simulamos un pago exitoso
     }
 }

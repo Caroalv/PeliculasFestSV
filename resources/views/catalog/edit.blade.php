@@ -34,7 +34,10 @@
                             <label for="synopsis">Resumen</label>
                             <textarea name="synopsis" id="synopsis" class="form-control" rows="3">{{$pelicula->synopsis}}</textarea>
                         </div>
-
+                        <div class="form-group">
+                            <label for="movie_url">Enlace de la pelicula</label>
+                            <input type="text" name="movie_url" id="movie_url" value="{{$pelicula->movie_url}}" class="form-control">
+                        </div>
                         <div class="form-group text-center">
                             <button type="submit" class="btn btn-dark" style="padding:8px 100px;margin-top:25px;">
                                 Modificar película
