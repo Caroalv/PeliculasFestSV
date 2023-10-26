@@ -31,8 +31,8 @@
                                 <option value="U">U (Todo público)</option>
                                 <option value="PG">PG (Con supervisión de padres)</option>
                                 <option value="12A">12A (Mayores de 12 años)</option>
-                                <option value="15">15 (Mayores de 15 años)</option>
-                                <option value="18">18 (Mayores de 18 años)</option>
+                                <option value="+15">15 (Mayores de 15 años)</option>
+                                <option value="+18">18 (Mayores de 18 años)</option>
                             </select>
                         </div>
 
@@ -49,6 +49,11 @@
                         <div class="form-group">
                             <label for="synopsis">Resumen</label>
                             <textarea name="synopsis" id="synopsis" class="form-control" rows="3"></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="country">Pais</label>
+                            <input type="text" name="country" id="country" class="form-control">
                         </div>
 
                         <div class="form-group">
