@@ -8,9 +8,12 @@
         </div>
         <div class="col-sm-8">
             <h3>{{$pelicula->title}}</h3>
+            <h5>Genero: {{$pelicula->gender}}</h5>        
             <h5>Año: {{$pelicula->year}}</h5>
+            <h5>Clasificación: {{$pelicula->classification}}</h5>        
             <h5>Director: {{$pelicula->director}}</h5>
             <p><strong>Resumen: </strong>{{$pelicula->synopsis}}</p>
+            <h5>Idioma Original: {{$pelicula->original_language}}</h5>        
             @if($pelicula->rented)
                 <!-- Muestra el enlace de YouTube como un botón -->
                 <form action="{{ $pelicula->movie_url }}" target="_blank">
