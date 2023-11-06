@@ -1,7 +1,7 @@
 @extends('layouts.master')
 @section('title', 'Ver película')
 @section('content')
-
+<br>
     <div class="row">
         <div class="col-sm-4">
             <img src="{{$pelicula->poster}}" alt="" style="height:400px"> 
