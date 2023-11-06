@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-
+use Illuminate\Support\Facades\DB;
 use App\User;
 
 use App\Movie;
@@ -24,165 +24,341 @@ class DatabaseSeeder extends Seeder{
     }
     private $arrayPeliculas = array(
         array(
-            'title' => 'El padrino',
+            'title' => 'El Padrino',
+            'gender' => 'Drama/Crimen',
             'year' => '1972',
+            'classification' => '+18',
             'director' => 'Francis Ford Coppola',
             'poster' => 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQq_qdHarij8GQCHNSwTp-EefWqC-q-QjdFLw&usqp=CAU',
             'rented' => false,
-            'synopsis' => 'Don Vito Corleone (Marlon Brando) es el respetado y temido jefe de una de las cinco familias de la mafia de Nueva York. Tiene cuatro hijos: Connie (Talia Shire), el impulsivo Sonny (James Caan), el pusilánime Freddie (John Cazale) y Michael (Al Pacino), que no quiere saber nada de los negocios de su padre. Cuando Corleone, en contra de los consejos de \'Il consigliere\' Tom Hagen (Robert Duvall), se niega a intervenir en el negocio de las drogas, el jefe de otra banda ordena su asesinato. Empieza entonces una violenta y cruenta guerra entre las familias mafiosas.'
+            'synopsis' => 'Don Vito Corleone (Marlon Brando) es el respetado y temido jefe de una de las cinco familias de la mafia de Nueva York. Tiene cuatro hijos: Connie (Talia Shire), el impulsivo Sonny (James Caan), el pusilánime Freddie (John Cazale) y Michael (Al Pacino), que no quiere saber nada de los negocios de su padre. Cuando Corleone, en contra de los consejos de Il consigliere Tom Hagen (Robert Duvall), se niega a intervenir en el negocio de las drogas, el jefe de otra banda ordena su asesinato. Empieza entonces una violenta y cruenta guerra entre las familias mafiosas.',
+            'country' => 'Estados Unidos',
+            'original_language' => 'Inglés',
+            'movie_url' => 'https://youtu.be/v72XprPxy3E?si=a0cB3b7ZyQAljZdt'            
         ),
         array(
-            'title' => 'El Padrino. Parte II',
-            'year' => '1974',
-            'director' => 'Francis Ford Coppola',
-            'poster' => 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRU6YiVZjMiSEePW04cQMaOmk-hUa4LQ1lr5g&usqp=CAU',
-            'rented' => false,
-            'synopsis' => 'Continuación de la historia de los Corleone por medio de dos historias paralelas: la elección de Michael Corleone como jefe de los negocios familiares y los orígenes del patriarca, el ya fallecido Don Vito, primero en Sicilia y luego en Estados Unidos, donde, empezando desde abajo, llegó a ser un poderosísimo jefe de la mafia de Nueva York.'
-        ),
-        array(
-            'title' => 'La lista de Schindler',
-            'year' => '1993',
-            'director' => 'Steven Spielberg',
-            'poster' => 'https://www.crisol.com.pe/media/catalog/product/cache/cf84e6047db2ba7f2d5c381080c69ffe/9/7/9786073196505_jzwnjpejbv1xdema.jpg',
-            'rented' => false,
-            'synopsis' => 'Segunda Guerra Mundial (1939-1945). Oskar Schindler (Liam Neeson), un hombre de enorme astucia y talento para las relaciones públicas, organiza un ambicioso plan para ganarse la simpatía de los nazis. Después de la invasión de Polonia por los alemanes (1939), consigue, gracias a sus relaciones con los nazis, la propiedad de una fábrica de Cracovia. Allí emplea a cientos de operarios judíos, cuya explotación le hace prosperar rápidamente. Su gerente (Ben Kingsley), también judío, es el verdadero director en la sombra, pues Schindler carece completamente de conocimientos para dirigir una empresa.'
-        ),
-        array(
-            'title' => 'Pulp Fiction',
-            'year' => '1994',
-            'director' => 'Quentin Tarantino',
-            'poster' => 'https://m.media-amazon.com/images/I/51d2N0TO5nL._SL500_.jpg',
-            'rented' => true,
-            'synopsis' => 'Jules y Vincent, dos asesinos a sueldo con muy pocas luces, trabajan para Marsellus Wallace. Vincent le confiesa a Jules que Marsellus le ha pedido que cuide de Mia, su mujer. Jules le recomienda prudencia porque es muy peligroso sobrepasarse con la novia del jefe. Cuando llega la hora de trabajar, ambos deben ponerse manos a la obra. Su misión: recuperar un misterioso maletín. '
-        ),
-        array(
-            'title' => 'Cadena perpetua',
-            'year' => '1994',
-            'director' => 'Frank Darabont',
-            'poster' => 'https://www.movistarplus.es/recorte/n/caratula4/F3758174',
-            'rented' => true,
-            'synopsis' => 'Acusado del asesinato de su mujer, Andrew Dufresne (Tim Robbins), tras ser condenado a cadena perpetua, es enviado a la cárcel de Shawshank. Con el paso de los años conseguirá ganarse la confianza del director del centro y el respeto de sus compañeros de prisión, especialmente de Red (Morgan Freeman), el jefe de la mafia de los sobornos.'
-        ),
-        array(
-            'title' => 'El golpe',
-            'year' => '1973',
-            'director' => 'George Roy Hill',
-            'poster' => 'https://www.mubis.es/media/releases/13843/283277/el-golpe-edicion-metalica-ultra-hd-blu-ray-m.jpg',
-            'rented' => false,
-            'synopsis' => 'Chicago, años treinta. Redford y Newman son dos timadores que deciden vengar la muerte de un viejo y querido colega, asesinado por orden de un poderoso gángster (Robert Shaw). Para ello urdirán un ingenioso y complicado plan con la ayuda de todos sus amigos y conocidos.'
-        ),
-        array(
-            'title' => 'La vida es bella',
+            'title' => 'La Vida es Bella',
+            'gender' => 'Comedia/Drama',
             'year' => '1997',
+            'classification' => 'PG',
             'director' => 'Roberto Benigni',
-            'poster' => 'https://ia.media-imdb.com/images/M/MV5BYmJmM2Q4NmMtYThmNC00ZjRlLWEyZmItZTIwOTBlZDQ3NTQ1XkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_UX182_CR0,0,182,268_AL_.jpg',
-            'rented' => true,
-            'synopsis' => 'En 1939, a punto de estallar la Segunda Guerra Mundial (1939-1945), el extravagante Guido llega a Arezzo (Toscana) con la intención de abrir una librería. Allí conoce a Dora y, a pesar de que es la prometida del fascista Ferruccio, se casa con ella y tiene un hijo. Al estallar la guerra, los tres son internados en un campo de exterminio, donde Guido hará lo imposible para hacer creer a su hijo que la terrible situación que están padeciendo es tan sólo un juego.'
-        ),
-        array(
-            'title' => 'Uno de los nuestros',
-            'year' => '1990',
-            'director' => 'Martin Scorsese',
-            'poster' => 'https://antonioariasrodriguez.files.wordpress.com/2012/07/unodelosnuestros-bd-600a.jpg?w=300&h=387',
+            'poster' => 'https://th.bing.com/th/id/R.1d66ddea10a4065e951b719f844896fa?rik=Nwfa9lweyF2VnA&pid=ImgRaw&r=0',
             'rented' => false,
-            'synopsis' => 'Henry Hill, hijo de padre irlandés y madre siciliana, vive en Brooklyn y se siente fascinado por la vida que llevan los gángsters de su barrio, donde la mayoría de los vecinos son inmigrantes. Paul Cicero, el patriarca de la familia Pauline, es el protector del barrio. A los trece años, Henry decide abandonar la escuela y entrar a formar parte de la organización mafiosa como chico de los recados; muy pronto se gana la confianza de sus jefes, gracias a lo cual irá subiendo de categoría. '
+            'synopsis' => 'Guido, un judío italiano, se muda a la Toscana con la promesa de darle a su hijo una vida mejor. Juntos, enfrentan los horrores de un campo de concentración nazi mientras Guido utiliza su ingenio para proteger a su hijo de la dura realidad que los rodea.',
+            'country' => 'Italia',
+            'original_language' => 'Italiano',
+            'movie_url' => 'https://youtu.be/s1DG6H_hc8E?si=fH4rwv6br0MtQBdM'
+                
         ),
+    
         array(
-            'title' => 'Alguien voló sobre el nido del cuco',
-            'year' => '1975',
-            'director' => 'Milos Forman',
-            'poster' => 'http://ia.media-imdb.com/images/M/MV5BMTk5OTA4NTc0NF5BMl5BanBnXkFtZTcwNzI5Mzg3OA@@._V1_SY317_CR12,0,214,317_AL_.jpg',
+            'title' => 'El Viaje de Chihiro',
+            'gender' => 'Animación/Fantasía',
+            'year' => '2001',
+            'classification' => 'PG',
+            'director' => 'Hayao Miyazaki',
+            'poster' => 'https://www.pelisxd.com/wp-content/uploads/2020/06/el-viaje-de-chihiro-26317-poster.jpg',
             'rented' => false,
-            'synopsis' => 'Randle McMurphy (Jack Nicholson), un hombre condenado por asalto, y un espíritu libre que vive contracorriente, es recluido en un hospital psiquiátrico. La inflexible disciplina del centro acentúa su contagiosa tendencia al desorden, que acabará desencadenando una guerra entre los pacientes y el personal de la clínica con la fría y severa enfermera Ratched (Louise Fletcher) a la cabeza. La suerte de cada paciente del pabellón está en juego.'
+            'synopsis' => 'La historia sigue a Chihiro, una niña que se encuentra atrapada en un mundo espiritual después de que sus padres sean transformados en cerdos. Chihiro debe buscar una forma de liberar a sus padres y regresar al mundo real, enfrentándose a numerosos desafíos y criaturas mágicas en el proceso.',
+            'country' => 'Japon',
+            'original_language' => 'Japonés',
+            'movie_url' => 'https://youtu.be/ByXuk9QqQkk?si=x_CTVsW08KdEWjmx'
         ),
+        
         array(
-            'title' => 'American History X',
-            'year' => '1998',
-            'director' => 'Tony Kaye',
-            'poster' => 'https://i.ytimg.com/vi/Q6jCuiRjg4Q/movieposter.jpg',
+            'title' => 'Spider-Man: Lejos de Casa',
+            'gender' => 'Acción/Aventura',
+            'year' => '2019',
+            'classification' => '12A',
+            'director' => 'Jon Watts',
+            'poster' => 'https://www.mubis.es/media/articles/23158/237019/poster-final-de-spider-man-lejos-de-casa-l_cover.jpg',
             'rented' => false,
-            'synopsis' => 'Derek (Edward Norton), un joven "skin head" californiano de ideología neonazi, fue encarcelado por asesinar a un negro que pretendía robarle su furgoneta. Cuando sale de prisión y regresa a su barrio dispuesto a alejarse del mundo de la violencia, se encuentra con que su hermano pequeño (Edward Furlong), para quien Derek es el modelo a seguir, sigue el mismo camino que a él lo condujo a la cárcel.'
+            'synopsis' => 'Peter Parker se va de vacaciones a Europa con sus amigos, pero su descanso se ve interrumpido cuando Nick Fury lo recluta para una misión urgente. Debe enfrentarse a nuevas amenazas, como Mysterio, y descubrir el misterio detrás de los Elementales.',
+            'country' => 'Estados Unidos',
+            'original_language' => 'Inglés',
+            'movie_url' => 'https://youtu.be/_CazeprALO8'
         ),
+    
         array(
-            'title' => 'Sin perdón',
-            'year' => '1992',
-            'director' => 'Clint Eastwood',
-            'poster' => 'https://decine21.com/img/upload/obras/sin-perdon-4670/sin-perdon-4670-c.jpg',
+            'title' => 'Transformers: El Lado Oscuro de la Luna',
+            'gender' => 'Acción/Ciencia ficción',
+            'year' => '2011',
+            'classification' => '12A',
+            'director' => 'Michael Bay',
+            'poster' => 'https://i.blogs.es/21972d/transformers-lado-oscuro-luna-poster/1366_2000.jpg',
             'rented' => false,
-            'synopsis' => 'William Munny (Clint Eastwood) es un pistolero retirado, viudo y padre de familia, que tiene dificultades económicas para sacar adelante a su hijos. Su única salida es hacer un último trabajo. En compañía de un viejo colega (Morgan Freeman) y de un joven inexperto (Jaimz Woolvett), Munny tendrá que matar a dos hombres que cortaron la cara a una prostituta.'
+            'synopsis' => 'Los Autobots y Decepticons se ven involucrados en una carrera espacial entre Estados Unidos y la Unión Soviética, y descubren la verdad sobre la misión Apolo 11 en la luna. Mientras tanto, Sam Witwicky se encuentra en medio de la lucha entre los dos grupos de robots.',
+            'country' => 'Estados Unidos',
+            'original_language' => 'Inglés',
+            'movie_url' => 'https://youtu.be/znmSDttImkI'
         ),
+    
         array(
-            'title' => 'El precio del poder',
-            'year' => '1983',
-            'director' => 'Brian De Palma',
-            'poster' => 'http://ia.media-imdb.com/images/M/MV5BMjAzOTM4MzEwNl5BMl5BanBnXkFtZTgwMzU1OTc1MDE@._V1_SX214_AL_.jpg',
+            'title' => 'El Señor de los Anillos: El Retorno del Rey',
+            'gender' => 'Aventura/Fantasía',
+            'year' => '2003',
+            'classification' => '12A',
+            'director' => 'Peter Jackson',
+            'poster' => 'https://m.media-amazon.com/images/I/71Xle4-8u+L._AC_SL1000_.jpg',
             'rented' => false,
-            'synopsis' => 'Tony Montana es un emigrante cubano frío y sanguinario que se instala en Miami con el propósito de convertirse en un gángster importante. Con la colaboración de su amigo Manny Rivera inicia una fulgurante carrera delictiva con el objetivo de acceder a la cúpula de una organización de narcos.'
+            'synopsis' => 'La batalla final por la Tierra Media se desencadena cuando Frodo y Sam llegan al Monte del Destino para destruir el Anillo Único. Mientras tanto, Aragorn lidera las fuerzas de Gondor en una lucha desesperada contra Sauron.',
+            'country' => 'Nueva Zelanda',
+            'original_language' => 'Inglés',
+            'movie_url' => 'https://youtu.be/h-9RYiqyqjk'
         ),
+    
         array(
-            'title' => 'El pianista',
-            'year' => '2002',
-            'director' => 'Roman Polanski',
-            'poster' => 'https://http2.mlstatic.com/D_NQ_NP_957205-MLA28384454449_102018-O.jpg',
-            'rented' => true,
-            'synopsis' => 'Wladyslaw Szpilman, un brillante pianista polaco de origen judío, vive con su familia en el ghetto de Varsovia. Cuando, en 1939, los alemanes invaden Polonia, consigue evitar la deportación gracias a la ayuda de algunos amigos. Pero tendrá que vivir escondido y completamente aislado durante mucho tiempo, y para sobrevivir tendrá que afrontar constantes peligros.'
-        ),
-        array(
-            'title' => 'Seven',
-            'year' => '1995',
-            'director' => 'David Fincher',
-            'poster' => 'http://ia.media-imdb.com/images/M/MV5BMTQwNTU3MTE4NF5BMl5BanBnXkFtZTcwOTgxNDM2Mg@@._V1_SX214_AL_.jpg',
-            'rented' => true,
-            'synopsis' => 'El veterano teniente Somerset (Morgan Freeman), del departamento de homicidios, está a punto de jubilarse y ser reemplazado por el ambicioso e impulsivo detective David Mills (Brad Pitt). Ambos tendrán que colaborar en la resolución de una serie de asesinatos cometidos por un psicópata que toma como base la relación de los siete pecados capitales: gula, pereza, soberbia, avaricia, envidia, lujuria e ira. Los cuerpos de las víctimas, sobre los que el asesino se ensaña de manera impúdica, se convertirán para los policías en un enigma que les obligará a viajar al horror y la barbarie más absoluta.'
-        ),
-        array(
-            'title' => 'El silencio de los corderos',
-            'year' => '1991',
-            'director' => 'Jonathan Demme',
-            'poster' => 'http://ia.media-imdb.com/images/M/MV5BMTQ2NzkzMDI4OF5BMl5BanBnXkFtZTcwMDA0NzE1NA@@._V1_SX214_AL_.jpg',
+            'title' => 'Capitán América: Civil War',
+            'gender' => 'Acción/Aventura',
+            'year' => '2016',
+            'classification' => '12A',
+            'director' => 'Anthony Russo, Joe Russo',
+            'poster' => 'https://im.ziffdavisinternational.com/ign_es/screenshot/default/cpkf2a1_zrhc.jpg',
             'rented' => false,
-            'synopsis' => 'El FBI busca a "Buffalo Bill", un asesino en serie que mata a sus víctimas, todas adolescentes, después de prepararlas minuciosamente y arrancarles la piel. Para poder atraparlo recurren a Clarice Starling, una brillante licenciada universitaria, experta en conductas psicópatas, que aspira a formar parte del FBI. Siguiendo las instrucciones de su jefe, Jack Crawford, Clarice visita la cárcel de alta seguridad donde el gobierno mantiene encerrado a Hannibal Lecter, antiguo psicoanalista y asesino, dotado de una inteligencia superior a la normal. Su misión será intentar sacarle información sobre los patrones de conducta de "Buffalo Bill".'
+            'synopsis' => 'Tras un incidente internacional que involucra a los Vengadores, el gobierno de los Estados Unidos decide supervisar y controlar las actividades de los superhéroes. Esto lleva a una fractura en el equipo, con Capitán América liderando una facción y Iron Man liderando la otra.',
+            'country' => 'Estados Unidos',
+            'original_language' => 'Inglés',
+            'movie_url' => 'https://youtu.be/LuOLcuKVFwY'
         ),
+    
         array(
-            'title' => 'La naranja mecánica',
-            'year' => '1971',
-            'director' => 'Stanley Kubrick',
-            'poster' => 'https://c8.alamy.com/zoomses/9/2ea43d005c1943f6b5fe8d363ce2b387/p44ep7.jpg',
+            'title' => 'Los Minions',
+            'gender' => 'Animación/Comedia',
+            'year' => '2015',
+            'classification' => 'PG',
+            'director' => 'Kyle Balda, Pierre Coffin',
+            'poster' => 'https://i.pinimg.com/736x/77/37/8f/77378ff26cc6707fbe5a97e331771258.jpg',
             'rented' => false,
-            'synopsis' => 'Gran Bretaña, en un futuro indeterminado. Alex (Malcolm McDowell) es un joven muy agresivo que tiene dos pasiones: la violencia desaforada y Beethoven. Es el jefe de la banda de los drugos, que dan rienda suelta a sus instintos más salvajes apaleando, violando y aterrorizando a la población. Cuando esa escalada de terror llega hasta el asesinato, Alex es detenido y, en prisión, se someterá voluntariamente a una innovadora experiencia de reeducación que pretende anular drásticamente cualquier atisbo de conducta antisocial.'
+            'synopsis' => 'Los Minions son seres amarillos que existen desde el principio de los tiempos y buscan al amo más despreciable para servirlo. En la década de 1960, se unen a Scarlet Overkill, una supervillana que planea robar la corona de Inglaterra.',
+            'country' => 'Estados Unidos',
+            'original_language' => 'Inglés',
+            'movie_url' => 'https://youtu.be/vzWZWI2UNpA'
         ),
+    
         array(
-            'title' => 'La chaqueta metálica',
-            'year' => '1987',
-            'director' => 'Stanley Kubrick',
-            'poster' => 'https://ia.media-imdb.com/images/M/MV5BNzc2ZThkOGItZGY5YS00MDYwLTkyOTAtNDRmZWIwMGRhYTc0L2ltYWdlXkEyXkFqcGdeQXVyNjU0OTQ0OTY@._V1_UX182_CR0,0,182,268_AL_.jpg',
-            'rented' => true,
-            'synopsis' => 'Un grupo de reclutas se prepara en Parish Island, centro de entrenamiento de la marina norteamericana. Allí está el sargento Hartman, duro e implacable, cuya única misión en la vida es endurecer el cuerpo y el alma de los novatos, para que puedan defenderse del enemigo. Pero no todos los jóvenes están preparados para soportar sus métodos. '
-        ),
-        array(
-            'title' => 'Blade Runner',
-            'year' => '1982',
-            'director' => 'Ridley Scott',
-            'poster' => 'https://ia.media-imdb.com/images/M/MV5BNzA1Njg4NzYxOV5BMl5BanBnXkFtZTgwODk5NjU3MzI@._V1_UX182_CR0,0,182,268_AL_.jpg',
-            'rented' => true,
-            'synopsis' => 'A principios del siglo XXI, la poderosa Tyrell Corporation creó, gracias a los avances de la ingeniería genética, un robot llamado Nexus 6, un ser virtualmente idéntico al hombre pero superior a él en fuerza y agilidad, al que se dio el nombre de Replicante. Estos robots trabajaban como esclavos en las colonias exteriores de la Tierra. Después de la sangrienta rebelión de un equipo de Nexus-6, los Replicantes fueron desterrados de la Tierra. Brigadas especiales de policía, los Blade Runners, tenían órdenes de matar a todos los que no hubieran acatado la condena. Pero a esto no se le llamaba ejecución, se le llamaba "retiro". '
-        ),
-        array(
-            'title' => 'Taxi Driver',
-            'year' => '1976',
-            'director' => 'Martin Scorsese',
-            'poster' => 'https://www.themoviedb.org/t/p/original/4AH400TLZ2QUOXW5YVYetPyF2ey.jpg',
+            'title' => 'Iron Man 3',
+            'gender' => 'Acción/Ciencia ficción',
+            'year' => '2013',
+            'classification' => '12A',
+            'director' => 'Shane Black',
+            'poster' => 'https://cdn.europosters.eu/image/750webp/14496.webp',
             'rented' => false,
-            'synopsis' => 'Para sobrellevar el insomnio crónico que sufre desde su regreso de Vietnam, Travis Bickle (Robert De Niro) trabaja como taxista nocturno en Nueva York. Es un hombre insociable que apenas tiene contacto con los demás, se pasa los días en el cine y vive prendado de Betsy (Cybill Shepherd), una atractiva rubia que trabaja como voluntaria en una campaña política. Pero lo que realmente obsesiona a Travis es comprobar cómo la violencia, la sordidez y la desolación dominan la ciudad. Y un día decide pasar a la acción.'
+            'synopsis' => 'Tony Stark, también conocido como Iron Man, se enfrenta a un enemigo cuyo poder no conoce límites. Debe utilizar su ingenio y su ingenio para proteger a su ser querido y enfrentar a un enemigo que conoce todos sus secretos.',
+            'country' => 'Estados Unidos',
+            'original_language' => 'Inglés',
+            'movie_url' => 'https://youtu.be/6Cl8PmVm3YE'
+        ),
+    
+        array(
+            'title' => 'Fast & Furious 8',
+            'gender' => 'Acción',
+            'year' => '2017',
+            'classification' => '12A',
+            'director' => 'F. Gary Gray',
+            'poster' => 'https://es.web.img3.acsta.net/r_1920_1080/pictures/17/03/27/09/49/121118.jpg',
+            'rented' => false,
+            'synopsis' => 'La familia de Dom Toretto se enfrenta a un enemigo inesperado cuando Dom se une a Cipher, una mujer criminal que lo chantajea para que traicione a sus amigos. La lealtad y la velocidad son puestas a prueba en esta emocionante aventura.',
+            'country' => 'Estados Unidos',
+            'original_language' => 'Inglés',
+            'movie_url' => 'https://youtu.be/BLKaI3D9P2E'
+        ),
+    
+        array(
+            'title' => 'Los Increíbles 2',
+            'gender' => 'Animación/Acción',
+            'year' => '2018',
+            'classification' => 'PG',
+            'director' => 'Brad Bird',
+            'poster' => 'https://http2.mlstatic.com/D_NQ_NP_881191-MLA28573952667_112018-O.webp',
+            'rented' => false,
+            'synopsis' => 'Los superhéroes de la familia Parr regresan a la acción cuando Helen Parr (Elastigirl) es reclutada para una misión especial, dejando a Bob Parr (Mr. Incredible) en casa para cuidar a los niños. Juntos, enfrentarán a un nuevo villano.',
+            'country' => 'Estados Unidos',
+            'original_language' => 'Inglés',
+            'movie_url' => 'https://youtu.be/92iqVqYGpxo'
         ),
         array(
-            'title' => 'El club de la lucha',
-            'year' => '1999',
-            'director' => 'David Fincher',
-            'poster' => 'https://http2.mlstatic.com/D_NQ_NP_880293-MLA43829656569_102020-O.jpg',
-            'rented' => true,
-            'synopsis' => 'Un joven hastiado de su gris y monótona vida lucha contra el insomnio. En un viaje en avión conoce a un carismático vendedor de jabón que sostiene una teoría muy particular: el perfeccionismo es cosa de gentes débiles; sólo la autodestrucción hace que la vida merezca la pena. Ambos deciden entonces fundar un club secreto de lucha, donde poder descargar sus frustaciones y su ira, que tendrá un éxito arrollador.'
+            'title' => 'Jurassic World: El Reino Caído',
+            'gender' => 'Acción/Aventura',
+            'year' => '2018',
+            'classification' => '12A',
+            'director' => 'J.A. Bayona',
+            'poster' => 'https://www.mubis.es/media/users/3724/194664/jurassic-world-el-reino-caido-fan-poster-l_cover.jpg',
+            'rented' => false,
+            'synopsis' => 'Cuando el volcán de la isla Nublar entra en erupción, Owen y Claire regresan para rescatar a los dinosaurios restantes de la extinción. Sin embargo, descubren una conspiración que podría amenazar a toda la humanidad.',
+            'country' => 'Estados Unidos',
+            'original_language' => 'Inglés',
+            'movie_url' => 'https://youtu.be/Pbxxz5uytCo'
+        ),
+    
+        array(
+            'title' => 'Star Wars: Episodio VIII - Los últimos Jedi',
+            'gender' => 'Ciencia ficción/Aventura',
+            'year' => '2017',
+            'classification' => '12A',
+            'director' => 'Rian Johnson',
+            'poster' => 'https://img.fruugo.com/product/8/71/63842718_max.jpg',
+            'rented' => false,
+            'synopsis' => 'Rey busca la ayuda de Luke Skywalker para aprender a controlar la Fuerza, mientras la Resistencia lucha contra la Primera Orden. Secretos del pasado se revelan en una épica batalla entre el bien y el mal.',
+            'country' => 'Estados Unidos',
+            'original_language' => 'Inglés',
+            'movie_url' => 'https://youtu.be/anOJjqQb8x0'
+        ),
+    
+        array(
+            'title' => 'Harry Potter y las reliquias de la muerte: parte 2',
+            'gender' => 'Aventura/Fantasía',
+            'year' => '2011',
+            'classification' => '12A',
+            'director' => 'David Yates',
+            'poster' => 'https://www.themoviedb.org/t/p/original/aM1TuUiPtV8OAZyu61CTdy9Ymtk.jpg',
+            'rented' => false,
+            'synopsis' => 'Harry, Ron y Hermione continúan su búsqueda de los Horrocruxes de Voldemort para destruirlo. La batalla final se avecina en Hogwarts, donde el bien y el mal se enfrentan en una lucha épica.',
+            'country' => 'Reino Unido',
+            'original_language' => 'Inglés',
+            'movie_url' => 'https://youtu.be/HguSMW8XveQ'
+        ),
+    
+        array(
+            'title' => 'Black Panther',
+            'gender' => 'Acción/Aventura',
+            'year' => '2018',
+            'classification' => '12A',
+            'director' => 'Ryan Coogler',
+            'poster' => 'https://www.cuartomundo.cl/wp-content/uploads/2018/02/black-panther-poster-oficial.jpg',
+            'rented' => false,
+            'synopsis' => 'T Challa, el rey de Wakanda, debe asumir el trono y enfrentar amenazas tanto desde dentro como desde fuera de su país. Black Panther debe proteger a su nación y su legado como superhéroe.',
+            'country' => 'Estados Unidos',
+            'original_language' => 'Inglés',
+            'movie_url' => 'https://youtu.be/JK-wAfAvJ0g'
+        ),
+    
+        array(
+            'title' => 'Frozen 2',
+            'gender' => 'Animación/Aventura',
+            'year' => '2019',
+            'classification' => 'PG',
+            'director' => 'Chris Buck, Jennifer Lee',
+            'poster' => 'https://i.ebayimg.com/images/g/3rIAAOSwaE1fjorN/s-l1600.jpg',
+            'rented' => false,
+            'synopsis' => 'Elsa, Anna y sus amigos se aventuran en un bosque encantado para descubrir el origen de los poderes de Elsa y salvar su reino. En el camino, enfrentan desafíos y descubrimientos sorprendentes.',
+            'country' => 'Estados Unidos',
+            'original_language' => 'Inglés',
+            'movie_url' => 'https://youtu.be/I-oJ5QjrX9M'
+        ),
+    
+        array(
+            'title' => 'Top Gun: Maverick',
+            'gender' => 'Acción/Drama',
+            'year' => '2022',
+            'classification' => '12A',
+            'director' => 'Joseph Kosinski',
+            'poster' => 'https://www.movieposters.com/cdn/shop/products/top_gun_maverick_ver2_480x.progressive.jpg?v=1578430896',
+            'rented' => false,
+            'synopsis' => 'El Capitán Pete "Maverick" Mitchell se enfrenta a un mundo de combate aéreo cada vez más tecnológico, mientras entrena a una nueva generación de pilotos de combate. Se enfrenta a desafíos personales y profesionales.',
+            'country' => 'Estados Unidos',
+            'original_language' => 'Inglés',
+            'movie_url' => 'https://youtu.be/zmFdhZ6gyUM'
+        ),
+    
+        array(
+            'title' => 'Los Vengadores',
+            'gender' => 'Acción/Aventura',
+            'year' => '2012',
+            'classification' => '12A',
+            'director' => 'Joss Whedon',
+            'poster' => 'https://cinembrollos.files.wordpress.com/2012/03/avengers_ver26_xlg.jpg?w=768&h=1087',
+            'rented' => false,
+            'synopsis' => 'Nick Fury reúne a un grupo de superhéroes, Los Vengadores, para enfrentarse a la amenaza de Loki y su ejército. Los héroes más poderosos de la Tierra se unen en una batalla épica.',
+            'country' => 'Estados Unidos',
+            'original_language' => 'Inglés',
+            'movie_url' => 'https://youtu.be/HQIyqOVTWo'
+        ),
+    
+        array(
+            'title' => 'El Rey León',
+            'gender' => 'Animación/Aventura',
+            'year' => '2019',
+            'classification' => 'PG',
+            'director' => 'Jon Favreau',
+            'poster' => 'https://hips.hearstapps.com/hmg-prod/images/rey-leon-poster-1551063927.jpeg?resize=2048:*',
+            'rented' => false,
+            'synopsis' => 'El joven león Simba debe enfrentar su destino y reclamar su lugar como rey de la Sabana, después de ser exiliado por su tío Scar. Una aventura épica de autodescubrimiento y coraje.',
+            'country' => 'Estados Unidos',
+            'original_language' => 'Inglés',
+            'movie_url' => 'https://youtu.be/7rxwEfFMbaY'
+        ),
+    
+        array(
+            'title' => 'Jurassic World',
+            'gender' => 'Acción/Aventura',
+            'year' => '2015',
+            'classification' => '12A',
+            'director' => 'Colin Trevorrow',
+            'poster' => 'https://i.pinimg.com/564x/a4/80/06/a4800605a7f3f2373031c10f872a807d.jpg',
+            'rented' => false,
+            'synopsis' => 'En el parque temático Jurassic World, los dinosaurios son una realidad. Pero cuando un dinosaurio modificado genéticamente escapa, el caos se desata y las vidas están en peligro.',
+            'country' => 'Estados Unidos',
+            'original_language' => 'Inglés',
+            'movie_url' => 'https://youtu.be/W5sk3lZULU4'
+        ),
+    
+        array(
+            'title' => 'Vengadores: Infinity War',
+            'gender' => 'Acción/Aventura',
+            'year' => '2018',
+            'classification' => '12A',
+            'director' => 'Anthony Russo, Joe Russo',
+            'poster' => 'https://www.cinemascomics.com/wp-content/uploads/2018/03/nuevo-poster-oficial-marvel-studios-vengadores-infinity-war.jpg.webp',
+            'rented' => false,
+            'synopsis' => 'Thanos, el titán loco, busca las Gemas del Infinito para llevar a cabo su plan de destrucción. Los Vengadores y sus aliados deben unirse para detenerlo y salvar el universo.',
+            'country' => 'Estados Unidos',
+            'original_language' => 'Inglés',
+            'movie_url' => 'https://youtu.be/-f5PwE_Q8Fs'
+        ),
+    
+        array(
+            'title' => 'Titanic',
+            'gender' => 'Drama/Romance',
+            'year' => '1997',
+            'classification' => '12A',
+            'director' => 'James Cameron',
+            'poster' => 'https://m.media-amazon.com/images/I/71ZJ8am0mKL._AC_SY879_.jpg',
+            'rented' => false,
+            'synopsis' => 'En su viaje inaugural, el RMS Titanic choca con un iceberg y se hunde en el Atlántico Norte. La historia de amor entre Jack y Rose se desarrolla en medio de la tragedia.',
+            'country' => 'Estados Unidos',
+            'original_language' => 'Inglés',
+            'movie_url' => 'https://youtu.be/FiRVcExwBVA'
+        ),
+    
+        array(
+            'title' => 'Avatar',
+            'gender' => 'Ciencia ficción/Aventura',
+            'year' => '2009',
+            'classification' => '12A',
+            'director' => 'James Cameron',
+            'poster' => 'https://m.media-amazon.com/images/I/61OtW2-WU+L._AC_SX679_.jpg',
+            'rented' => false,
+            'synopsis' => 'En el planeta Pandora, los humanos explotan los recursos naturales mientras los nativos Na vi luchan por proteger su hogar. Un ex-marine se encuentra en medio de este conflicto y debe elegir un bando.',
+            'country' => 'Estados Unidos',
+            'original_language' => 'Inglés',
+            'movie_url' => 'https://youtu.be/qZAC7c3nBfY'
+        ),
+        array(
+            'title' => 'La Bella y la Bestia',
+            'gender' => 'Fantasía/Musical',
+            'year' => '2017',
+            'classification' => 'PG',
+            'director' => 'Bill Condon',
+            'poster' => 'https://i.pinimg.com/564x/d1/66/e2/d166e2ab327b51e2ed55d6a40c3a32a3.jpg',
+            'rented' => false,
+            'synopsis' => 'Bella, una joven brillante y apasionada por los libros, es tomada prisionera por una bestia en su castillo. A medida que conoce a los encantados objetos y descubre el pasado de la bestia, se desarrolla un inesperado romance.',
+            'country' => 'Estados Unidos',
+            'original_language' => 'Inglés',
+            'movie_url' => 'https://youtu.be/XpMjfUJ1lUc'
         )
+
+
+        
     );
 
     private function seedCatalog(){
@@ -190,11 +366,16 @@ class DatabaseSeeder extends Seeder{
         foreach( $this->arrayPeliculas as $pelicula ) {
             $p = new Movie;
             $p->title = $pelicula['title'];
+            $p->gender = $pelicula['gender'];
             $p->year = $pelicula['year'];
+            $p->classification = $pelicula['classification'];
             $p->director = $pelicula['director'];
             $p->poster = $pelicula['poster'];
             $p->rented = $pelicula['rented'];
             $p->synopsis = $pelicula['synopsis'];
+            $p->country = $pelicula['country'];
+            $p->original_language = $pelicula['original_language'];
+            $p->movie_url = $pelicula['movie_url'];
             $p->save();
         }
     }
