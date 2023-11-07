@@ -1,18 +1,11 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CatalogController;
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
+use App\Http\Controllers\PaymentController;
+
 
 Route::get('/', function () {
     return view('welcome');
@@ -20,7 +13,7 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 Route::get('catalog', [CatalogController::class, 'getIndex']);
 
@@ -37,3 +30,11 @@ Route::post('/catalog/create', [CatalogController::class, 'postCreate']);
 Route::get('catalog/edit/{id}', [CatalogController::class, 'getEdit']);
 
 Route::post('/catalog/edit/{id}', [CatalogController::class, 'edit']);
+
+// Ruta para mostrar el formulario de pago
+Route::get('/payment/{id}', [PaymentController::class, 'showPaymentForm'])->name('payment.show');
+
+// Ruta para procesar el pago
+Route::post('/payment/process', [PaymentController::class, 'processPayment'])->name('payment.process');
+
+Route::get('catalog/show/{id}', [CatalogController::class, 'getShow'])->name('catalog.show');

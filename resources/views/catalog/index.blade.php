@@ -1,5 +1,6 @@
 @extends('layouts.master')
 @section('content')
+<br>
     <div class="row">
         @foreach( $peliculas as $key => $pelicula )
             <div class="col-xs-6 col-sm-4 col-md-3 text-center">
