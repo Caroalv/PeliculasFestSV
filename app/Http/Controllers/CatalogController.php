@@ -31,6 +31,7 @@ class CatalogController extends Controller
             'director' => $data['director'], // Campo añadido
             'poster' => $data['poster'],
             'synopsis' => $data['synopsis'],
+            'country' => $data['country'],
             'original_language' => $data['original_language'],
             'movie_url' => $data['movie_url'],
             'rented' => false
@@ -55,6 +56,7 @@ class CatalogController extends Controller
         $movie->director = $request->input('director');
         $movie->poster = $request->input('poster');
         $movie->synopsis = $request->input('synopsis');
+        $movie->country = $request->input('country');
         $movie->original_language = $request->input('original_language');
         $movie->movie_url = $request->input('movie_url');
         $movie->save();

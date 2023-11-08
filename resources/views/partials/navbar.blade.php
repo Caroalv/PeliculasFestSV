@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-danger bg-danger navbar-laravel">
     <div class="container">
-        <a class="navbar-brand" href="/" style="color:#ffffff"><span style="font-size:20pt">&#9820;</span> PeliculasFestSV</a>
+        <a class="navbar-brand" href="/catalog" style="color:#ffffff"><span style="font-size:20pt">&#9820;</span> PeliculasFestSV</a>
 
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>

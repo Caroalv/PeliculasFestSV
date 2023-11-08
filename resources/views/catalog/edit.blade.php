@@ -31,8 +31,8 @@
                                 <option value="U" {{ $pelicula->classification == 'U' ? 'selected' : '' }}>U (Todo público)</option>
                                 <option value="PG" {{ $pelicula->classification == 'PG' ? 'selected' : '' }}>PG (Con supervisión de padres)</option>
                                 <option value="12A" {{ $pelicula->classification == '12A' ? 'selected' : '' }}>12A (Mayores de 12 años)</option>
-                                <option value="15" {{ $pelicula->classification == '15' ? 'selected' : '' }}>15 (Mayores de 15 años)</option>
-                                <option value="18" {{ $pelicula->classification == '18' ? 'selected' : '' }}>18 (Mayores de 18 años)</option>
+                                <option value="+15" {{ $pelicula->classification == '+15' ? 'selected' : '' }}>15 (Mayores de 15 años)</option>
+                                <option value="+18" {{ $pelicula->classification == '+18' ? 'selected' : '' }}>18 (Mayores de 18 años)</option>
                             </select>
                         </div>
 
@@ -49,6 +49,10 @@
                         <div class="form-group">
                             <label for="synopsis">Resumen</label>
                             <textarea name="synopsis" id="synopsis" class="form-control" rows="3">{{$pelicula->synopsis}}</textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="country">Pais</label>
+                            <input type="text" name="country" id="country" value="{{$pelicula->country}}" class="form-control">
                         </div>
                         <div class="form-group">
                             <label for="original_language">Idioma Original</label>

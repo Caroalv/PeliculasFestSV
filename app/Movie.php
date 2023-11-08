@@ -13,6 +13,6 @@ class Movie extends Model
     ];
 
     protected $fillable = [
-        'title', 'gender','year', 'classification', 'director', 'poster', 'synopsis', 'original_language','movie_url', 'rented'
+        'title', 'gender','year', 'classification', 'director', 'poster', 'synopsis', 'country', 'original_language','movie_url', 'rented'
     ];
 }

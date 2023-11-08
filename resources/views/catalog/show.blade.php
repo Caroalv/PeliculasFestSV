@@ -1,19 +1,20 @@
 @extends('layouts.master')
 @section('title', 'Ver película')
 @section('content')
-
+<br>
     <div class="row">
         <div class="col-sm-4">
             <img src="{{$pelicula->poster}}" alt="" style="height:400px"> 
         </div>
         <div class="col-sm-8">
             <h3>{{$pelicula->title}}</h3>
-            <h5>Genero: {{$pelicula->gender}}</h5>        
-            <h5>Año: {{$pelicula->year}}</h5>
-            <h5>Clasificación: {{$pelicula->classification}}</h5>        
-            <h5>Director: {{$pelicula->director}}</h5>
-            <p><strong>Resumen: </strong>{{$pelicula->synopsis}}</p>
-            <h5>Idioma Original: {{$pelicula->original_language}}</h5>        
+            <h6>Genero: {{$pelicula->gender}}</h6>        
+            <h6>Año: {{$pelicula->year}}</h6>
+            <h6>Clasificación: {{$pelicula->classification}}</h6>        
+            <h6>Director: {{$pelicula->director}}</h6>
+            <h6>Pais: {{$pelicula->country}}</h6> 
+            <h6>Idioma Original: {{$pelicula->original_language}}</h6> 
+            <p><h5><strong>Resumen: </strong>{{$pelicula->synopsis}}</h5></p>       
             @if($pelicula->rented)
                 <!-- Muestra el enlace de YouTube como un botón -->
                 <form action="{{ $pelicula->movie_url }}" target="_blank">
