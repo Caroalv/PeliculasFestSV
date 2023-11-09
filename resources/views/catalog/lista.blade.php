@@ -1,3 +1,4 @@
+
 @extends('layouts.master')
 @section('title', 'Lista de Películas')
 @section('content')
@@ -13,7 +14,7 @@
                     <thead>
                         <tr>
                             <th>Título</th>
-                            <th>Género</th>5
+                            <th>Género</th>
                             <th>Año</th>
                             <th>Clasificación</th>
                             <th>Director</th>

@@ -27,7 +27,7 @@ class CreateMoviesTabla extends Migration
             $table->string('title');
             $table->string('year', 8);
             $table->string('director', 64);
-            $table->string('poster');
+            $table->text('poster');
             $table->boolean('rented')->defaul(false);
             $table->text('synopsis');
             $table->timestamps();
