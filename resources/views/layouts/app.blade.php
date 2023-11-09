@@ -40,7 +40,7 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
-                    <li class="nav-item {{ Request::is('catalog') && ! Request::is('catalog/create') && ! Request::is('catalog/listar') ? 'active' : ''}}">
+                    <li class="nav-item {{ Request::is('catalog') && ! Request::is('catalog/create') && ! Request::is('catalog/listar') && !  Request::is('catalog/grafica') ? 'active' : ''}}">
                         <a class="nav-link " style="color:#ffffff" href="{{url('/catalog')}}">
                             <span class="glyphicon glyphicon-film" aria-hidden="true"></span>
                             Catálogo
@@ -52,6 +52,12 @@
                      Listar Películas
                          </a>
                     </li>
+                    <li class="nav-item {{  Request::is('catalog/grafica') ? 'active' : ''}}">
+                        <a class="nav-link" style="color:#ffffff" href="{{url('/catalog/grafica')}}">
+                            <span>&#10010</span>Grafica
+                        </a>
+                    </li>
+
                     <li class="nav-item {{  Request::is('catalog/create') ? 'active' : ''}}">
                         <a class="nav-link" style="color:#ffffff" href="{{url('/catalog/create')}}">
                             <span>&#10010</span> Nueva película
