@@ -38,3 +38,6 @@ Route::get('/payment/{id}', [PaymentController::class, 'showPaymentForm'])->name
 Route::post('/payment/process', [PaymentController::class, 'processPayment'])->name('payment.process');
 
 Route::get('catalog/show/{id}', [CatalogController::class, 'getShow'])->name('catalog.show');
+
+Route::get('/catalog/listar', [CatalogController::class, 'listarPeliculas']);
+

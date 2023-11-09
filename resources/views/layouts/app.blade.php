@@ -40,17 +40,25 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
-                    <li class="nav-item {{ Request::is('catalog') && ! Request::is('catalog/create')? 'active' : ''}}">
+                    <li class="nav-item {{ Request::is('catalog') && ! Request::is('catalog/create') && ! Request::is('catalog/listar') ? 'active' : ''}}">
                         <a class="nav-link " style="color:#ffffff" href="{{url('/catalog')}}">
                             <span class="glyphicon glyphicon-film" aria-hidden="true"></span>
                             Catálogo
                         </a>
+                    </li>
+                    <li class="nav-item {{ Request::is('catalog/listar') ? 'active' : ''}}">
+                     <a class="nav-link" style="color:#ffffff" href="{{url('/catalog/listar')}}">
+                     <span class="glyphicon glyphicon-list" aria-hidden="true"></span>
+                     Listar Películas
+                         </a>
                     </li>
                     <li class="nav-item {{  Request::is('catalog/create') ? 'active' : ''}}">
                         <a class="nav-link" style="color:#ffffff" href="{{url('/catalog/create')}}">
                             <span>&#10010</span> Nueva película
                         </a>
                     </li>
+
+
                     </ul>
 
                     <!-- Right Side Of Navbar -->

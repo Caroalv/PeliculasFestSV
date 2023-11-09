@@ -106,6 +106,12 @@ class CatalogController extends Controller
         return $this->getIndex();
     }
 
+    public function listarPeliculas()
+    {
+        $movies = Movie::all(); // Cambiado de $movie a $movies
+        return view('catalog.lista', ['peliculas' => $movies]); // Cambiado de 'pelicula' a 'peliculas'
+    }
+    
 
 }
 

@@ -1,6 +1,7 @@
 @extends('layouts.master')
 @section('title', 'Crear película')
 @section('content')
+
     <div class="row" style="margin-top:40px">
         <div class="offset-md-3 col-md-6">
             <div class="card">
@@ -66,7 +67,7 @@
                             <input type="text" name="movie_url" id="movie_url" class="form-control">
                         </div>                        
                         <div class="form-group text-center">
-                            <button type="submit" class="btn btn-dark" style="padding:8px 100px;margin-top:25px;">
+                            <button type="submit" class="btn btn-dark " id="añadir_pelicula" style="padding:8px 100px;margin-top:25px;">
                                 Añadir película
                             </button>
                         </div>
@@ -76,4 +77,38 @@
         </div>
     </div>
 
+    <script>
+document.addEventListener('DOMContentLoaded', function () {
+        // Selecciona todos los botones con el ID "guardar-alumno"
+        const añadir_pelicula = document.querySelector('#añadir_pelicula');
+
+        añadir_pelicula.addEventListener('click', (event) => {
+            event.preventDefault(); 
+            Swal.fire({
+                title: 'Quieres añadir esta pelicula?',
+                showDenyButton: true,
+                showCancelButton: true,
+                confirmButtonText: 'Guardar',
+                denyButtonText: `No Guardar`,
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Swal.fire({
+         position: "center",
+         icon: "success",
+         title: "Pelicula añadida",
+         showConfirmButton: false,
+             timer: 15500
+});
+                    // Aquí puedes enviar el formulario manualmente
+                    const form = event.target.closest('form');
+                    form.submit();
+                } else if (result.isDenied) {
+                    Swal.fire('Cambios no Guardados', '', 'Ups');
+                }
+            });
+        });
+    });
+</script>
+
 @stop
+

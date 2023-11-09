@@ -39,11 +39,66 @@
 
                         <input type="hidden" name="pelicula_id" value="{{ $pelicula->id }}">
 
-                        <button type="submit" class="btn btn-primary">Procesar Pago</button>
+                        <button type="submit" class="btn btn-primary" id="pagar">Procesar Pago</button>
+                        <a href="{{ route('catalog.show', ['id' => $pelicula->id]) }}" class="btn btn-secondary" id="cancelarVolver">Cancelar y Volver</a>
+
                     </form>
                 </div>
             </div>
         </div>
     </div>
+        <script>
+document.addEventListener('DOMContentLoaded', function () {
+    // Selecciona el botón con el ID "pagar"
+    const pagar = document.querySelector('#pagar');
+
+    pagar.addEventListener('click', (event) => {
+        event.preventDefault();
+        Swal.fire({
+            title: "Quieres proceder con el pago?",
+            showDenyButton: true,
+            showCancelButton: true,
+            confirmButtonText: "Pagar",
+            denyButtonText: `Cancelar`
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire("Guardado!", "", "success");
+                // El formulario se envía si el usuario confirma
+                event.target.closest('form').submit();
+            } else if (result.isDenied) {
+                Swal.fire({
+                    title: "Changes are not saved",
+                    icon: "info",
+                    timer: 2222000, // Establece una duración de 2 segundos
+                    showConfirmButton: false, // Oculta el botón "OK" en la segunda alerta
+                });
+            }
+        });
+    });
+});
+
+        </script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const cancelarVolverButton = document.querySelector('#cancelarVolver');
+
+        cancelarVolverButton.addEventListener('click', (event) => {
+            event.preventDefault();
+            Swal.fire({
+                title: "¿Estás seguro de que deseas cancelar y volver?",
+                text: "Tus cambios no se guardarán.",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonText: "Sí, cancelar y volver",
+                cancelButtonText: "No, quedarse en esta página",
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Redirige al usuario a la página de catálogo
+                    window.location.href = "{{ route('catalog.show', ['id' => $pelicula->id]) }}";
+                }
+            });
+        });
+    });
+</script>
 </div>
 @endsection

@@ -47,10 +47,34 @@
                 method="POST" style="display:inline">
                 @method('DELETE')
                 @csrf
-                <button type="submit" class="btn btn-danger" style="display:inline">
+                <button type="button" class="btn btn-danger eliminar-pelicula" style="display:inline">
                     Eliminar pelicula
                 </button>
             </form>
         </div>
+        <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Selecciona todos los botones con la clase "delete-task"
+        const deleteButtons = document.querySelectorAll('.eliminar-pelicula');
+
+        deleteButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                Swal.fire({
+                    title: '¿Estás seguro?',
+                    text: 'Esta acción no se puede deshacer.',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: 'Sí, eliminar',
+                    cancelButtonText: 'Cancelar'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // El formulario se envía si el usuario confirma
+                        button.closest('form').submit();
+                    }
+                });
+            });
+        });
+    });
+</script>
     </div>
 @stop
