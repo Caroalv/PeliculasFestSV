@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-danger bg-danger navbar-laravel">
     <div class="container">
-        <a class="navbar-brand" href="/catalog" style="color:#ffffff"><span style="font-size:20pt">&#9820;</span> PeliculasFestSV</a>
+        <a class="navbar-brand" href="/home" style="color:#ffffff"><span style="font-size:20pt">&#9820;</span> PeliculasFestSV</a>
 
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -15,6 +15,12 @@
                             Catálogo
                         </a>
                     </li>
+                    <li class="nav-item {{ Request::is('catalog/listar') ? 'active' : ''}}">
+                        <a class="nav-link" style="color:#ffffff" href="{{url('/catalog/listar')}}">
+                        <span class="glyphicon glyphicon-list" aria-hidden="true"></span>
+                        Listar Películas
+                            </a>
+                       </li>
                     <li class="nav-item {{  Request::is('catalog/create') ? 'active' : ''}}">
                         <a class="nav-link" style="color:#ffffff" href="{{url('/catalog/create')}}">
                             <span>&#10010</span> Nueva película

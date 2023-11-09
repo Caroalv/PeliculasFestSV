@@ -20,7 +20,7 @@
 
 <div class="md:w-4/12">
     <div class="logo-container">
-        <img src="{{ asset('img/pelis10.jpeg') }}" alt="Logo de la empresa">
+        <img src="{{ asset('img/peli1.jpeg') }}" alt="Logo de la empresa">
     </div>
 </div>
 
