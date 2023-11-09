@@ -57,8 +57,6 @@
                             <span>&#10010</span> Nueva película
                         </a>
                     </li>
-
-
                     </ul>
 
                     <!-- Right Side Of Navbar -->
