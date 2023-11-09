@@ -111,6 +111,14 @@ class CatalogController extends Controller
         $movies = Movie::all(); // Cambiado de $movie a $movies
         return view('catalog.lista', ['peliculas' => $movies]); // Cambiado de 'pelicula' a 'peliculas'
     }
+
+    public function categoriasPeliculas()
+    {
+        $movies = Movie::all(); // Cambiado de $movie a $movies
+        return view('catalog.categorias', ['peliculas' => $movies]); // Cambiado de 'pelicula' a 'peliculas'
+    }
+
+    
     
 
 }

@@ -41,3 +41,5 @@ Route::get('catalog/show/{id}', [CatalogController::class, 'getShow'])->name('ca
 
 Route::get('/catalog/listar', [CatalogController::class, 'listarPeliculas']);
 
+Route::get('/catalog/categorias', [CatalogController::class, 'categoriasPeliculas']);
+
