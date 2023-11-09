@@ -10,7 +10,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'PeliculasFestSV') }}</title>
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -23,7 +23,7 @@
         <nav class="navbar navbar-expand-md navbar-danger bg-danger navbar-laravel">
             <div class="container">
                 <a class="navbar-brand" style="color:#ffffff" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
+                    {{ config('app.name', 'PeliculasFestSV') }}
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -31,6 +31,7 @@
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav mr-auto">
+<<<<<<< HEAD
                         <li class="nav-item {{ Request::is('catalog') && ! Request::is('catalog/create')? 'active' : ''}}">
                             <a class="nav-link" style="color:#ffffff" href="{{url('/catalog')}}">
                                 <span class="glyphicon glyphicon-film" aria-hidden="true"></span>
@@ -71,6 +72,27 @@
                                 <!-- Agrega más elementos de dropdown según sea necesario -->
                             </ul>
                         </li>
+=======
+                    <li class="nav-item {{ Request::is('catalog') && ! Request::is('catalog/create') && ! Request::is('catalog/listar') ? 'active' : ''}}">
+                        <a class="nav-link " style="color:#ffffff" href="{{url('/catalog')}}">
+                            <span class="glyphicon glyphicon-film" aria-hidden="true"></span>
+                            Catálogo
+                        </a>
+                    </li>
+                    <li class="nav-item {{ Request::is('catalog/listar') ? 'active' : ''}}">
+                     <a class="nav-link" style="color:#ffffff" href="{{url('/catalog/listar')}}">
+                     <span class="glyphicon glyphicon-list" aria-hidden="true"></span>
+                     Listar Películas
+                         </a>
+                    </li>
+                    <li class="nav-item {{  Request::is('catalog/create') ? 'active' : ''}}">
+                        <a class="nav-link" style="color:#ffffff" href="{{url('/catalog/create')}}">
+                            <span>&#10010</span> Nueva película
+                        </a>
+                    </li>
+
+
+>>>>>>> origin/main
                     </ul>
 
                     <ul class="navbar-nav ml-auto">

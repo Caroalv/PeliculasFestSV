@@ -39,8 +39,12 @@ Route::post('/payment/process', [PaymentController::class, 'processPayment'])->n
 
 Route::get('catalog/show/{id}', [CatalogController::class, 'getShow'])->name('catalog.show');
 
+<<<<<<< HEAD
 
 
 
 
+=======
+Route::get('/catalog/listar', [CatalogController::class, 'listarPeliculas']);
+>>>>>>> origin/main
 

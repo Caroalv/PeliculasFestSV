@@ -63,13 +63,68 @@
                             <input type="text" name="movie_url" id="movie_url" value="{{$pelicula->movie_url}}" class="form-control">
                         </div>
                         <div class="form-group text-center">
-                            <button type="submit" class="btn btn-dark" style="padding:8px 100px;margin-top:25px;">
+                            <button type="submit" class="btn btn-dark" id="modificar_pelicula" style="padding:8px 100px;margin-top:25px;">
                                 Modificar película
                             </button>
+                            <a href="{{ route('catalog.show', ['id' => $pelicula->id]) }}" class="btn btn-secondary" id="cancelarVolver">Cancelar y Volver</a>
+
                         </div>
                     </form>
                 </div>
             </div>
         </div>
+        <script>
+document.addEventListener('DOMContentLoaded', function () {
+        // Selecciona todos los botones con el ID "guardar-alumno"
+        const modificar_pelicula = document.querySelector('#modificar_pelicula');
+
+        modificar_pelicula.addEventListener('click', (event) => {
+            event.preventDefault(); 
+            Swal.fire({
+                title: 'Quieres modificar esta pelicula?',
+                showDenyButton: true,
+                showCancelButton: true,
+                confirmButtonText: 'Guardar',
+                denyButtonText: `No Guardar`,
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Swal.fire({
+         position: "center",
+         icon: "success",
+         title: "Pelicula modificada",
+         showConfirmButton: false,
+});
+                    // Aquí puedes enviar el formulario manualmente
+                    const form = event.target.closest('form');
+                    form.submit();
+                } else if (result.isDenied) {
+                    Swal.fire('Cambios no Guardados', '', 'Ups');
+                }
+            });
+        });
+    });
+</script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const cancelarVolverButton = document.querySelector('#cancelarVolver');
+
+        cancelarVolverButton.addEventListener('click', (event) => {
+            event.preventDefault();
+            Swal.fire({
+                title: "¿Estás seguro de que deseas cancelar y volver?",
+                text: "Tus cambios no se guardarán.",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonText: "Sí, cancelar y volver",
+                cancelButtonText: "No, quedarse en esta página",
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Redirige al usuario a la página de catálogo
+                    window.location.href = "{{ route('catalog.show', ['id' => $pelicula->id]) }}";
+                }
+            });
+        });
+    });
+</script>
     </div>
 @stop
