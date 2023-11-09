@@ -71,7 +71,7 @@ class DatabaseSeeder extends Seeder{
             'year' => '2019',
             'classification' => '12A',
             'director' => 'Jon Watts',
-            'poster' => 'https://www.mubis.es/media/articles/23158/237019/poster-final-de-spider-man-lejos-de-casa-l_cover.jpg',
+            'poster' => 'https://play-lh.googleusercontent.com/JusxG5ceS8fWzfG1fC4LNyjE2TI4Z98f2xa8aQG3qMCtYIKWqHTfBjmJQaydf7Rnfn7qcN1w5sArwqIjBqym=w240-h480-rw',
             'rented' => false,
             'synopsis' => 'Peter Parker se va de vacaciones a Europa con sus amigos, pero su descanso se ve interrumpido cuando Nick Fury lo recluta para una misión urgente. Debe enfrentarse a nuevas amenazas, como Mysterio, y descubrir el misterio detrás de los Elementales.',
             'country' => 'Estados Unidos',
