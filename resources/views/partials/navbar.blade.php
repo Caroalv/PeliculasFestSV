@@ -21,6 +21,7 @@
                         </a>
                     </li>
                 </ul>
+                
 
                 <ul class="navbar-nav navbar-right">
                     <li class="nav-item">
@@ -31,6 +32,7 @@
                             </button>
                         </form>
                     </li>
+                    
                 </ul>
             </div>
         @endif

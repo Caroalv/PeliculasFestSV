@@ -9,12 +9,14 @@
         justify-content: center;
         align-items: center;
         overflow: hidden;
+        
     }
 
     .logo-container img {
         width: 100%;
         height: 100%;
         object-fit: cover; /* Controla cómo se ajusta la imagen sin desplazamientos */
+        
     }
 </style>
 
@@ -24,4 +26,9 @@
     </div>
 </div>
 
-@endsection
+@endsection 
+
+
+
+ 
+ 

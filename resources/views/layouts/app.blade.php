@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="{{ app()->getLocale() }}">
 <head>
@@ -10,21 +12,11 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
-
-    <!-- Fonts -->
-    <link rel="dns-prefetch" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,600" rel="stylesheet" type="text/css">
-
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-
-    <link rel="stylesheet" href="{{ asset('css/custom.css') }}"> 
-
+    <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
 </head>
 <body>
     <div id="app">
@@ -38,30 +30,61 @@
                 </button>
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
-                    <li class="nav-item {{ Request::is('catalog') && ! Request::is('catalog/create')? 'active' : ''}}">
-                        <a class="nav-link " style="color:#ffffff" href="{{url('/catalog')}}">
-                            <span class="glyphicon glyphicon-film" aria-hidden="true"></span>
-                            Catálogo
-                        </a>
-                    </li>
-                    <li class="nav-item {{  Request::is('catalog/create') ? 'active' : ''}}">
-                        <a class="nav-link" style="color:#ffffff" href="{{url('/catalog/create')}}">
-                            <span>&#10010</span> Nueva película
-                        </a>
-                    </li>
+                        <li class="nav-item {{ Request::is('catalog') && ! Request::is('catalog/create')? 'active' : ''}}">
+                            <a class="nav-link" style="color:#ffffff" href="{{url('/catalog')}}">
+                                <span class="glyphicon glyphicon-film" aria-hidden="true"></span>
+                                Catálogo
+                            </a>
+                        </li>
+
+                        <li class="nav-item {{  Request::is('catalog/create') ? 'active' : ''}}">
+                            <a class="nav-link" style="color:#ffffff" href="{{url('/catalog/create')}}">
+                                <span>&#10010;</span> Nueva película
+                            </a>
+                        </li>
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color:#ffffff">
+                                Categorias
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="#">Accion</a></li>
+                                <li><a class="dropdown-item" href="#">Animacion Kids</a></li>
+                                <li><a class="dropdown-item" href="#">Animes</a></li>
+                                <li><a class="dropdown-item" href="#">Aventuras</a></li>
+                                <li><a class="dropdown-item" href="#">Ciencia Ficcion</a></li>
+                                <li><a class="dropdown-item" href="#">Comedia</a></li>
+                                <li><a class="dropdown-item" href="#">Cristianos</a></li>
+                                <li><a class="dropdown-item" href="#">Documentales</a></li>
+                                <li><a class="dropdown-item" href="#">Doramas</a></li>
+                                <li><a class="dropdown-item" href="#">Dramas</a></li>
+                                <li><a class="dropdown-item" href="#">Educativos</a></li>
+                                <li><a class="dropdown-item" href="#">Familiar</a></li>
+                                <li><a class="dropdown-item" href="#">Fantasia</a></li>
+                                <li><a class="dropdown-item" href="#">Historia</a></li>
+                                <li><a class="dropdown-item" href="#">Misterio</a></li>
+                                <li><a class="dropdown-item" href="#">Novelas</a></li>
+                                <li><a class="dropdown-item" href="#">Romanticas</a></li>
+                                <li><a class="dropdown-item" href="#">Suspenso</a></li>
+                                <li><a class="dropdown-item" href="#">Terror</a></li>
+                                <!-- Agrega más elementos de dropdown según sea necesario -->
+                            </ul>
+                        </li>
                     </ul>
 
-                    <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
                         @guest
-                            <li><a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a></li>
-                            <li><a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a></li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                            </li>
                         @else
                             <li class="nav-item dropdown">
-                                <a id="navbarDropdown" style="color:#ffffff" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color:#ffffff">
                                     {{ Auth::user()->name }} <span class="caret"></span>
                                 </a>
 
@@ -83,15 +106,17 @@
             </div>
         </nav>
 
+        
+
         <main class="py-4">
             @yield('content')
         </main>
     </div>
-    <!-- Optional JavaScript -->
-<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </body>
 </html>
