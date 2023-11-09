@@ -22,13 +22,6 @@
                             </a>
                        </li>
 
-                       <li class="nav-item {{ Request::is('catalog/categorias') ? 'active' : ''}}">
-                        <a class="nav-link" style="color:#ffffff" href="{{url('/catalog/categorias')}}">
-                        <span class="glyphicon glyphicon-list" aria-hidden="true"></span>
-                        Categorias de Películas
-                            </a>
-                       </li>
-
                     <li class="nav-item {{  Request::is('catalog/create') ? 'active' : ''}}">
                         <a class="nav-link" style="color:#ffffff" href="{{url('/catalog/create')}}">
                             <span>&#10010</span> Nueva película
@@ -36,7 +29,11 @@
                     </li>
                 </ul>
                 
-
+                <form class="form-inline my-2 my-lg-0" action="{{ route('peliculas.buscar') }}" method="GET">
+                    <input class="form-control mr-sm-2" type="text" name="query" placeholder="Buscar películas" aria-label="Search">
+                    <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Buscar</button>
+                </form>
+                
                 <ul class="navbar-nav navbar-right">
                     <li class="nav-item">
                         <form action="{{ url('/logout') }}" method="POST" style="display:inline">

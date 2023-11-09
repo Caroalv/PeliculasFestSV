@@ -41,5 +41,8 @@ Route::get('catalog/show/{id}', [CatalogController::class, 'getShow'])->name('ca
 
 Route::get('/catalog/listar', [CatalogController::class, 'listarPeliculas']);
 
-Route::get('/catalog/categorias', [CatalogController::class, 'categoriasPeliculas']);
+// Agrega una ruta para buscar películas
+Route::get('/catalog/buscar', [CatalogController::class, 'buscarPeliculas'])->name('peliculas.buscar');
 
+// Modifica la ruta existente para ver detalles de una película
+Route::get('catalog/show/{id}', [CatalogController::class, 'getShow'])->name('catalog.show');

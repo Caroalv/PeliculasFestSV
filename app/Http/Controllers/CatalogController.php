@@ -112,13 +112,17 @@ class CatalogController extends Controller
         return view('catalog.lista', ['peliculas' => $movies]); // Cambiado de 'pelicula' a 'peliculas'
     }
 
-    public function categoriasPeliculas()
-    {
-        $movies = Movie::all(); // Cambiado de $movie a $movies
-        return view('catalog.categorias', ['peliculas' => $movies]); // Cambiado de 'pelicula' a 'peliculas'
-    }
 
-    
+
+    public function buscarPeliculas(Request $request)
+{
+    $query = $request->input('query');
+    $peliculas = Movie::where('title', 'LIKE', "%$query%")->get();
+
+    // Puedes pasar las películas encontradas a una vista
+    return view('catalog.search', ['peliculas' => $peliculas]);
+}
+
     
 
 }
