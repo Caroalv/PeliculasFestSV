@@ -31,48 +31,6 @@
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav mr-auto">
-<<<<<<< HEAD
-                        <li class="nav-item {{ Request::is('catalog') && ! Request::is('catalog/create')? 'active' : ''}}">
-                            <a class="nav-link" style="color:#ffffff" href="{{url('/catalog')}}">
-                                <span class="glyphicon glyphicon-film" aria-hidden="true"></span>
-                                Catálogo
-                            </a>
-                        </li>
-
-                        <li class="nav-item {{  Request::is('catalog/create') ? 'active' : ''}}">
-                            <a class="nav-link" style="color:#ffffff" href="{{url('/catalog/create')}}">
-                                <span>&#10010;</span> Nueva película
-                            </a>
-                        </li>
-
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color:#ffffff">
-                                Categorias
-                            </a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="#">Accion</a></li>
-                                <li><a class="dropdown-item" href="#">Animacion Kids</a></li>
-                                <li><a class="dropdown-item" href="#">Animes</a></li>
-                                <li><a class="dropdown-item" href="#">Aventuras</a></li>
-                                <li><a class="dropdown-item" href="#">Ciencia Ficcion</a></li>
-                                <li><a class="dropdown-item" href="#">Comedia</a></li>
-                                <li><a class="dropdown-item" href="#">Cristianos</a></li>
-                                <li><a class="dropdown-item" href="#">Documentales</a></li>
-                                <li><a class="dropdown-item" href="#">Doramas</a></li>
-                                <li><a class="dropdown-item" href="#">Dramas</a></li>
-                                <li><a class="dropdown-item" href="#">Educativos</a></li>
-                                <li><a class="dropdown-item" href="#">Familiar</a></li>
-                                <li><a class="dropdown-item" href="#">Fantasia</a></li>
-                                <li><a class="dropdown-item" href="#">Historia</a></li>
-                                <li><a class="dropdown-item" href="#">Misterio</a></li>
-                                <li><a class="dropdown-item" href="#">Novelas</a></li>
-                                <li><a class="dropdown-item" href="#">Romanticas</a></li>
-                                <li><a class="dropdown-item" href="#">Suspenso</a></li>
-                                <li><a class="dropdown-item" href="#">Terror</a></li>
-                                <!-- Agrega más elementos de dropdown según sea necesario -->
-                            </ul>
-                        </li>
-=======
                     <li class="nav-item {{ Request::is('catalog') && ! Request::is('catalog/create') && ! Request::is('catalog/listar') ? 'active' : ''}}">
                         <a class="nav-link " style="color:#ffffff" href="{{url('/catalog')}}">
                             <span class="glyphicon glyphicon-film" aria-hidden="true"></span>
@@ -92,7 +50,6 @@
                     </li>
 
 
->>>>>>> origin/main
                     </ul>
 
                     <ul class="navbar-nav ml-auto">
