@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
+use Illuminate\Support\Facades\DB;
+
 
 use App\Movie;
 
@@ -111,6 +113,22 @@ class CatalogController extends Controller
         $movies = Movie::all(); // Cambiado de $movie a $movies
         return view('catalog.lista', ['peliculas' => $movies]); // Cambiado de 'pelicula' a 'peliculas'
     }
+    public function mostrarGrafico()
+    {
+        $alquiladas = Movie::where('rented', true)->count();
+        $disponibles = Movie::where('rented', false)->count();
+    
+        $generos = Movie::select('gender', DB::raw('count(*) as total'))
+            ->groupBy('gender')
+            ->get();
+    
+        $clasificacionPeliculas = Movie::select('classification', DB::raw('count(*) as cantidad'))
+            ->groupBy('classification')
+            ->get();
+    
+        return view('catalog.grafica', compact('alquiladas', 'disponibles', 'generos', 'clasificacionPeliculas'));
+    }
+    
     
 
 }

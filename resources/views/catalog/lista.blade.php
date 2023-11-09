@@ -17,18 +17,26 @@
                             <th>Año</th>
                             <th>Clasificación</th>
                             <th>Director</th>
+                            <th>Estado de Alquiler</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach($peliculas as $pelicula)
-                            <tr>
-                                <td>{{ $pelicula->title }}</td>
-                                <td>{{ $pelicula->gender }}</td>
-                                <td>{{ $pelicula->year }}</td>
-                                <td>{{ $pelicula->classification }}</td>
-                                <td>{{ $pelicula->director }}</td>
-                            </tr>
-                        @endforeach
+                    @foreach($peliculas as $pelicula)
+                        <tr>
+                            <td>{{ $pelicula->title }}</td>
+                            <td>{{ $pelicula->gender }}</td>
+                            <td>{{ $pelicula->year }}</td>
+                            <td>{{ $pelicula->classification }}</td>
+                            <td>{{ $pelicula->director }}</td>
+                            <td>
+                                @if($pelicula->rented)
+                                    Alquilada
+                                @else
+                                    Disponible
+                                @endif
+                            </td>
+                        </tr>
+                    @endforeach
                     </tbody>
                 </table>
             </div>

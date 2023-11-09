@@ -21,6 +21,11 @@
                         Listar Películas
                             </a>
                        </li>
+                       <li class="nav-item {{  Request::is('catalog/grafica') ? 'active' : ''}}">
+                        <a class="nav-link" style="color:#ffffff" href="{{url('/catalog/grafica')}}">
+                        </span>Grafica
+                        </a>
+                    </li>
                     <li class="nav-item {{  Request::is('catalog/create') ? 'active' : ''}}">
                         <a class="nav-link" style="color:#ffffff" href="{{url('/catalog/create')}}">
                             <span>&#10010</span> Nueva película
