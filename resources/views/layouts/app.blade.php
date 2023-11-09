@@ -54,7 +54,7 @@
                     </li>
                     <li class="nav-item {{  Request::is('catalog/grafica') ? 'active' : ''}}">
                         <a class="nav-link" style="color:#ffffff" href="{{url('/catalog/grafica')}}">
-                            <span>&#10010</span>Grafica
+                        </span>Grafica
                         </a>
                     </li>
 
