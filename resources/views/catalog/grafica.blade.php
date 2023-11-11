@@ -2,37 +2,67 @@
 @section('title', 'Gráficas de Películas')
 @section('content')
 
+<!-- Agregar un poco de estilo para mejorar la presentación -->
+<style>
+    body {
+        font-family: 'Arial', sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f4f4;
+    }
+
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+
+    .chart-container {
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        margin-bottom: 20px;
+        padding: 20px;
+    }
+
+    h2 {
+        color: #333;
+    }
+</style>
+
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-<div style="display: flex; flex-direction: row;">
-    <div style="width: 50%;">
-        <h1>Gráfica de Películas Alquiladas</h1>
-        <div style="width: 400px; height: 400px;">
+<div class="container">
+
+    <div class="chart-container">
+        <h2>Gráfica de Películas Alquiladas</h2>
+        <div style="width: 100%; max-width: 600px; margin: 0 auto;">
             <canvas id="graficoPeliculasAlquiladas"></canvas>
         </div>
     </div>
-    <div style="width: 50%;">
-        <h1>Gráfica de Películas por Género</h1>
-        <div style="width: 400px; height: 400px;">
+
+    <div class="chart-container">
+        <h2>Gráfica de Películas por Género</h2>
+        <div style="width: 100%; max-width: 600px; margin: 0 auto;">
             <canvas id="graficoPeliculasGenero"></canvas>
         </div>
     </div>
-</div>
-<div style="width: 50%;">
-    <h1>Gráfica de Clasificación de Películas</h1>
-    <div style="width: 400; height: 400px;">
-        <canvas id="graficoClasificacionPeliculas"></canvas>
+
+    <div class="chart-container">
+        <h2>Gráfica de Clasificación de Películas</h2>
+        <div style="width: 100%; max-width: 600px; margin: 0 auto;">
+            <canvas id="graficoClasificacionPeliculas"></canvas>
+        </div>
     </div>
+
 </div>
 
 <script>
-    // Datos para la gráfica de películas alquiladas
     var alquiladas = <?php echo $alquiladas; ?>;
     var disponibles = <?php echo $disponibles; ?>;
     var datosPeliculasAlquiladas = [alquiladas, disponibles];
     var etiquetasPeliculasAlquiladas = ['Alquiladas', 'Disponibles'];
 
-    // Datos para la gráfica de películas por género
     var generos = <?php echo json_encode($generos); ?>;
     var etiquetasGeneros = generos.map(function (item) {
         return item.gender;
@@ -41,16 +71,14 @@
         return item.total;
     });
 
-    // Datos para la gráfica de clasificación de películas
     var clasificacionPeliculas = <?php echo json_encode($clasificacionPeliculas); ?>;
     var etiquetasClasificacion = clasificacionPeliculas.map(function (item) {
-        return item.classification; // Asegúrate de usar el nombre correcto del campo en la base de datos
+        return item.classification;
     });
     var datosClasificacion = clasificacionPeliculas.map(function (item) {
-        return item.cantidad; // Asegúrate de usar el nombre correcto del campo en la base de datos
+        return item.cantidad;
     });
 
-    // Configuración de la gráfica de películas alquiladas
     var configuracionPeliculasAlquiladas = {
         type: 'bar',
         data: {
@@ -71,7 +99,6 @@
         }
     };
 
-    // Configuración de la gráfica de películas por género
     var configuracionPeliculasGenero = {
         type: 'bar',
         data: {
@@ -79,7 +106,7 @@
             datasets: [{
                 label: 'Cantidad',
                 data: datosPeliculasGenero,
-                backgroundColor: 'multi-color'
+                backgroundColor: 'purple' // Cambiado a un solo color para simplificar
             }]
         },
         options: {
@@ -92,7 +119,6 @@
         }
     };
 
-    // Configuración de la gráfica de clasificación de películas
     var configuracionClasificacionPeliculas = {
         type: 'bar',
         data: {
@@ -100,7 +126,7 @@
             datasets: [{
                 label: 'Cantidad',
                 data: datosClasificacion,
-                backgroundColor: 'blue'
+                backgroundColor: ['blue', 'green', 'purple', 'black'] // Colores diferentes para cada barra
             }]
         },
         options: {
@@ -122,4 +148,6 @@
     var ctxClasificacionPeliculas = document.getElementById('graficoClasificacionPeliculas').getContext('2d');
     var miGraficoClasificacionPeliculas = new Chart(ctxClasificacionPeliculas, configuracionClasificacionPeliculas);
 </script>
+
+
 @endsection

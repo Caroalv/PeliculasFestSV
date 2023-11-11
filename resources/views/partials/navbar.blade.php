@@ -18,7 +18,7 @@
                     <li class="nav-item {{ Request::is('catalog/listar') ? 'active' : ''}}">
                         <a class="nav-link" style="color:#ffffff" href="{{url('/catalog/listar')}}">
                         <span class="glyphicon glyphicon-list" aria-hidden="true"></span>
-                        Listar Películas
+                        Lista de Peliculas
                             </a>
                        </li>
                        <li class="nav-item {{  Request::is('catalog/grafica') ? 'active' : ''}}">
@@ -42,13 +42,42 @@
                     <li class="nav-item">
                         <form action="{{ url('/logout') }}" method="POST" style="display:inline">
                             {{ csrf_field() }}
-                            <button type="submit" class="btn btn-link nav-link" style="color:#ffffff" style="display:inline;cursor:pointer">
+                            <button type="submit" class="btn btn-link nav-link" style="color:#ffffff" id="cerrar_sesion" style="display:inline;cursor:pointer">
                                 Cerrar sesión
                             </button>
                         </form>
                     </li>
                     
                 </ul>
+                <script>
+                    document.addEventListener('DOMContentLoaded', function () {
+        // Selecciona todos los botones con el ID "guardar-alumno"
+        const cerrar_sesion = document.querySelector('#cerrar_sesion');
+
+        cerrar_sesion.addEventListener('click', (event) => {
+            event.preventDefault(); 
+            Swal.fire({
+                title: 'Quieres Cerrar sesion?',
+                showDenyButton: true,
+                confirmButtonText: 'Cerrar sesion',
+                denyButtonText: `Permanecer en la Pagina`,
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Swal.fire({
+         position: "center",
+         icon: "success",
+         title: "Sesion cerrada ",
+         showConfirmButton: false,
+             timer: 15500
+});
+                    // Aquí puedes enviar el formulario manualmente
+                    const form = event.target.closest('form');
+                    form.submit();
+                }
+            });
+        });
+    });
+                </script>
             </div>
         @endif
     </div>

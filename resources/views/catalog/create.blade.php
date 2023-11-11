@@ -87,7 +87,6 @@ document.addEventListener('DOMContentLoaded', function () {
             Swal.fire({
                 title: 'Quieres añadir esta pelicula?',
                 showDenyButton: true,
-                showCancelButton: true,
                 confirmButtonText: 'Guardar',
                 denyButtonText: `No Guardar`,
             }).then((result) => {
