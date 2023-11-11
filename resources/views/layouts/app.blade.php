@@ -54,7 +54,7 @@
                     </li>
                     <li class="nav-item {{  Request::is('catalog/grafica') ? 'active' : ''}}">
                         <a class="nav-link" style="color:#ffffff" href="{{url('/catalog/grafica')}}">
-                            <span>&#10010</span>Grafica
+                        </span>Grafica
                         </a>
                     </li>
 
@@ -63,12 +63,15 @@
                             <span>&#10010</span> Nueva película
                         </a>
                     </li>
-
-
                     </ul>
+
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
+                        <form class="form-inline my-2 my-lg-0" action="{{ route('peliculas.buscar') }}" method="GET">
+                            <input class="form-control mr-sm-2" type="text" name="query" placeholder="Buscar películas" aria-label="Search">
+                            <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Buscar</button>
+                        </form>
                         <!-- Authentication Links -->
                         @guest
                             <li><a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a></li>
