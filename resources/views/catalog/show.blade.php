@@ -29,7 +29,7 @@
                     method="POST" style="display:inline">
                     @method('PUT')
                     @csrf
-                    <button type="submit" class="btn btn-danger" style="display:inline">
+                    <button type="submit" class="btn btn-danger" style="display:inline" id="devolver_pelicula">
                         Devolver película
                     </button>
                 </form>
@@ -76,5 +76,58 @@
         });
     });
 </script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    // Selecciona todos los botones con el ID "devolver_pelicula"
+    const devolver_pelicula = document.querySelector('#devolver_pelicula');
+
+    devolver_pelicula.addEventListener('click', (event) => {
+        event.preventDefault();
+
+        const swalWithBootstrapButtons = Swal.mixin({
+            customClass: {
+                confirmButton: "btn btn-success",
+                cancelButton: "btn btn-danger"
+            },
+            buttonsStyling: false
+        });
+
+        swalWithBootstrapButtons.fire({
+            title: "¿Estás seguro?",
+            text: "No podrás revertir esto",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonText: "Sí, devolver película",
+            cancelButtonText: "No, cancelar",
+            reverseButtons: true
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire({
+         position: "center",
+         icon: "success",
+         title: "Pelicula devuelta",
+         showConfirmButton: false,
+             timer: 15500
+                });
+
+                const form = event.target.closest('form');
+                form.submit();
+            } else if (result.dismiss === Swal.DismissReason.cancel) {
+                swalWithBootstrapButtons.fire({
+                    title: "Cancelado",
+                    text: "La película no ha sido devuelta",
+                    icon: "error"
+                });
+            } else if (result.isDenied) {
+                Swal.fire('Cambios no Guardados', '', 'error');
+            }
+        });
+    });
+});
+
+</script>
+
+
     </div>
 @stop
