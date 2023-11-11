@@ -49,8 +49,8 @@
                     <li class="nav-item {{ Request::is('catalog/listar') ? 'active' : ''}}">
                      <a class="nav-link" style="color:#ffffff" href="{{url('/catalog/listar')}}">
                      <span class="glyphicon glyphicon-list" aria-hidden="true"></span>
-                     Listar Películas
-                         </a>
+                     Lista de Peliculas
+                             </a>
                     </li>
                     <li class="nav-item {{  Request::is('catalog/grafica') ? 'active' : ''}}">
                         <a class="nav-link" style="color:#ffffff" href="{{url('/catalog/grafica')}}">
