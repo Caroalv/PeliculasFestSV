@@ -41,8 +41,11 @@
                     </button>
                 </form>
             @endif
+            @if(auth()->user()->hasRole('admin'))
             <a class="btn btn-warning" href="/catalog/edit/{{$pelicula->id}}">Editar película</a>
+            @endif
             <a type="button" class="btn btn-dark" href="/catalog">Volver al listado</a>
+            @if(auth()->user()->hasRole('admin'))
             <form action="{{action([App\Http\Controllers\CatalogController::class, 'deleteMovie'], ['id' => $pelicula->id])}}" 
                 method="POST" style="display:inline">
                 @method('DELETE')
@@ -51,6 +54,7 @@
                     Eliminar pelicula
                 </button>
             </form>
+            @endif
         </div>
         <script>
     document.addEventListener('DOMContentLoaded', function () {

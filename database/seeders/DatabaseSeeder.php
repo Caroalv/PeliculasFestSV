@@ -1,9 +1,11 @@
 <?php
 
+use Database\Seeders\RolesTableSeeder;
+use Database\Seeders\RoleUserTableSeeder;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
-use App\User;
-
+use App\Models\Role;
+use App\Models\User;
 use App\Movie;
 
 class DatabaseSeeder extends Seeder{
@@ -380,13 +382,27 @@ class DatabaseSeeder extends Seeder{
         }
     }
 
-    public function run(){
+    private function assignAdminRole()
+    {
+        $adminRole = Role::where('name', 'admin')->first();
+        $user = User::where('email', 'admin@gmail.com')->first();
+
+        if ($adminRole && $user) {
+            $user->assignRole($adminRole);
+        }
+    }
+
+    public function run()
+    {
         self::seedUsers();
         $this->command->info('Tabla usuarios fue inicializada con datos');
         self::seedCatalog();
         $this->command->info('Tabla catálogo inicializada con datos!');
-        
-        // $this->call(UsersTableSeeder::class);
+        $this->assignAdminRole();
+        $this->command->info('Rol de administrador asignado al usuario!');
+
+        $this->call(RolesTableSeeder::class);
+        $this->call(RoleUserTableSeeder::class);
 
     }
-}   
+}
