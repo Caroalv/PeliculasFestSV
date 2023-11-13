@@ -1,6 +1,7 @@
 @extends('layouts.master')
 @section('title', 'Crear película')
 @section('content')
+@if(auth()->user()->hasRole('admin'))
 
     <div class="row" style="margin-top:40px">
         <div class="offset-md-3 col-md-6">
@@ -76,7 +77,12 @@
             </div>
         </div>
     </div>
-
+    @else
+    <br>
+        <div class="alert alert-danger" role="alert">
+            No tienes permisos para acceder a esta página.
+        </div>
+    @endif
     <script>
 document.addEventListener('DOMContentLoaded', function () {
         // Selecciona todos los botones con el ID "guardar-alumno"
