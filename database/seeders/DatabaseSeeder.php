@@ -21,7 +21,14 @@ class DatabaseSeeder extends Seeder{
         DB::table('users')->insert([
             'name' => 'Admin',
             'email' => 'admin@gmail.com',
-            'password' => bcrypt('admin'),
+            'password' => bcrypt('admin2023'),
+        ]);
+        
+        // Añadimos una entrada a esta tabla
+        DB::table('users')->insert([
+            'name' => 'Usuario',
+            'email' => 'usuario@gmail.com',
+            'password' => bcrypt('usuario2023'),
         ]);
     }
     private $arrayPeliculas = array(
@@ -384,11 +391,20 @@ class DatabaseSeeder extends Seeder{
 
     private function assignAdminRole()
     {
+        // Asignamos el rol 'admin' al usuario con el email 'admin@gmail.com'
         $adminRole = Role::where('name', 'admin')->first();
         $user = User::where('email', 'admin@gmail.com')->first();
 
         if ($adminRole && $user) {
             $user->assignRole($adminRole);
+        }
+
+        // Asignamos el rol 'user' al usuario con el email 'usuario@gmail.com'
+        $userRole = Role::where('name', 'user')->first();
+        $userUser = User::where('email', 'user@gmail.com')->first();
+
+        if ($userRole && $userUser) {
+            $userUser->assignRole($userRole);
         }
     }
 
