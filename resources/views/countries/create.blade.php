@@ -3,6 +3,8 @@
 @section('title', 'Crear País')
 
 @section('content')
+@if(auth()->user()->hasRole('admin'))
+
     <h2>Crear País</h2>
 
     <form action="{{ route('countries.store') }}" method="POST">
@@ -13,4 +15,10 @@
         </div>
         <button type="submit" class="btn btn-primary">Guardar</button>
     </form>
+    @else
+        <br>
+        <div class="alert alert-danger" role="alert">
+            No tienes permisos para acceder a esta página.
+        </div>
+    @endif
 @endsection

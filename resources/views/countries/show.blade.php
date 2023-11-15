@@ -7,12 +7,13 @@
     
     <p><strong>ID:</strong> {{ $country->id }}</p>
     <p><strong>Nombre:</strong> {{ $country->name }}</p>
-
+    @if(auth()->user()->hasRole('admin'))
     <a href="{{ route('countries.edit', $country->id) }}" class="btn btn-warning">Editar</a>
     <form action="{{ route('countries.destroy', $country->id) }}" method="POST" style="display:inline">
         @csrf
         @method('DELETE')
         <button type="submit" class="btn btn-danger" onclick="return confirm('¿Estás seguro?')">Eliminar</button>
     </form>
+    @endif
     <a href="{{ route('countries.index') }}" class="btn btn-secondary">Volver al listado</a>
 @endsection

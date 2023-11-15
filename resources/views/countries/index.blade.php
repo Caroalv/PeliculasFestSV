@@ -20,17 +20,20 @@
                     <td>{{ $country->name }}</td>
                     <td>
                         <a href="{{ route('countries.show', $country->id) }}" class="btn btn-info">Ver</a>
+                        @if(auth()->user()->hasRole('admin'))
                         <a href="{{ route('countries.edit', $country->id) }}" class="btn btn-warning">Editar</a>
                         <form action="{{ route('countries.destroy', $country->id) }}" method="POST" style="display:inline">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-danger" onclick="return confirm('¿Estás seguro?')">Eliminar</button>
                         </form>
+                        @endif
                     </td>
                 </tr>
             @endforeach
         </tbody>
     </table>
-
+    @if(auth()->user()->hasRole('admin'))
     <a href="{{ route('countries.create') }}" class="btn btn-success">Agregar País</a>
+    @endif
 @endsection

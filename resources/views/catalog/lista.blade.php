@@ -28,7 +28,7 @@
                             <td>{{ $pelicula->gender }}</td>
                             <td>{{ $pelicula->year }}</td>
                             <td>{{ $pelicula->classification }}</td>
-                            <td>{{ $pelicula->director }}</td>
+                            <td>{{ $pelicula->director->name }}</td>
                             <td>
                                 @if($pelicula->rented)
                                     Alquilada

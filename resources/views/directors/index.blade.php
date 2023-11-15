@@ -20,17 +20,20 @@
                     <td>{{ $director->name }}</td>
                     <td>
                         <a href="{{ route('directors.show', $director->id) }}" class="btn btn-info">Ver</a>
+                        @if(auth()->user()->hasRole('admin'))
                         <a href="{{ route('directors.edit', $director->id) }}" class="btn btn-warning">Editar</a>
                         <form action="{{ route('directors.destroy', $director->id) }}" method="POST" style="display:inline">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-danger" onclick="return confirm('¿Estás seguro?')">Eliminar</button>
                         </form>
+                        @endif
                     </td>
                 </tr>
             @endforeach
         </tbody>
     </table>
-
+    @if(auth()->user()->hasRole('admin'))
     <a href="{{ route('directors.create') }}" class="btn btn-success">Agregar Director</a>
+    @endif
 @endsection

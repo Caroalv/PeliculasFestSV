@@ -26,11 +26,14 @@
                             <span>Grafica</span>
                         </a>
                     </li>
+                    
+                    @if(auth()->user()->hasRole('admin'))
                     <li class="nav-item {{  Request::is('catalog/create') ? 'active' : ''}}">
                         <a class="nav-link" style="color:#ffffff" href="{{url('/catalog/create')}}">
                             <span>&#10010</span> Nueva película
                         </a>
                     </li>
+                    @endif
                 </ul>
 
                 <ul class="navbar-nav ml-auto">

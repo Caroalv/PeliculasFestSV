@@ -3,6 +3,7 @@
 @section('title', 'Crear Nuevo Género')
 
 @section('content')
+@if(auth()->user()->hasRole('admin'))
     <h1>Crear Nuevo Género</h1>
 
     <form action="{{ route('genres.store') }}" method="POST">
@@ -15,4 +16,10 @@
 
         <button type="submit" class="btn btn-primary">Guardar</button>
     </form>
+@else
+    <br>
+    <div class="alert alert-danger" role="alert">
+        No tienes permisos para acceder a esta página.
+    </div>
+@endif    
 @endsection

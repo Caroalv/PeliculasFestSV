@@ -57,17 +57,33 @@
                         </span>Grafica
                         </a>
                     </li>
-
+                    @if(auth()->user()->hasRole('admin'))
                     <li class="nav-item {{  Request::is('catalog/create') ? 'active' : ''}}">
                         <a class="nav-link" style="color:#ffffff" href="{{url('/catalog/create')}}">
                             <span>&#10010</span> Nueva película
                         </a>
                     </li>
+                    @endif
                     </ul>
 
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
+
+                        <ul class="navbar-nav ml-auto">
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" style="color:#ffffff" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Opciones
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                    <a class="dropdown-item" href="{{ route('genres.index') }}"> Géneros</a>
+                                    <a class="dropdown-item" href="{{ route('directors.index') }}"> Directores</a>
+                                    <a class="dropdown-item" href="{{ route('countries.index') }}"> Países</a>
+                                    <a class="dropdown-item" href="{{ route('languages.index') }}"> Idiomas</a>
+                                </div>
+                            </li>
+                        </ul>
+
                         <form class="form-inline my-2 my-lg-0" action="{{ route('peliculas.buscar') }}" method="GET">
                             <input class="form-control mr-sm-2" type="text" name="query" placeholder="Buscar películas" aria-label="Search">
                             <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Buscar</button>
