@@ -1,8 +1,8 @@
 @extends('layouts.app')
-@section('title', 'Gráficas de Películas')
-@section('content')
 
-<!-- Agregar un poco de estilo para mejorar la presentación -->
+@section('title', 'Gráficas de Películas')
+
+@section('content')
 <style>
     body {
         font-family: 'Arial', sans-serif;
@@ -30,8 +30,6 @@
     }
 </style>
 
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
 <div class="container">
 
     <div class="chart-container">
@@ -50,6 +48,7 @@
 
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
     var alquiladas = <?php echo $alquiladas; ?>;
     var disponibles = <?php echo $disponibles; ?>;

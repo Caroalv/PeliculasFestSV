@@ -5,13 +5,13 @@
 @section('content')
     @if(auth()->user()->hasRole('admin'))
 
-        <div class="row" style="margin-top:40px">
-            <div class="offset-md-3 col-md-6">
+        <div class="row mt-5 justify-content-center">
+            <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header text-center navbar-danger bg-danger" style="color:#ffffff">
-                        Añadir película
+                    <div class="card-header text-center navbar-danger bg-danger text-white">
+                        <h2>Añadir película</h2>
                     </div>
-                    <div class="card-body" style="padding:30px">
+                    <div class="card-body" style="padding: 30px;">
                         <form action="{{ route('catalog.create') }}" method="POST">
                             @csrf
                             <div class="form-group">
@@ -55,7 +55,7 @@
 
                             <div class="form-group">
                                 <label for="poster">Poster</label>
-                                <input type="text" name="poster" id="poster" class="form-control" style="height:200px">
+                                <input type="text" name="poster" id="poster" class="form-control" style="height: 200px">
                             </div>
 
                             <div class="form-group">
@@ -87,7 +87,7 @@
                             </div>
 
                             <div class="form-group text-center">
-                                <button type="submit" class="btn btn-dark" id="añadir_pelicula" style="padding:8px 100px;margin-top:25px;">
+                                <button type="submit" class="btn btn-danger" id="añadir_pelicula" style="padding: 8px 100px; margin-top: 25px;">
                                     Añadir película
                                 </button>
                             </div>
@@ -97,12 +97,13 @@
             </div>
         </div>
     @else
-        <br>
-        <div class="alert alert-danger" role="alert">
+        <div class="alert alert-danger mt-3" role="alert">
             No tienes permisos para acceder a esta página.
         </div>
     @endif
 
+    <!-- Agregar SweetAlert y DataTables -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             const añadir_pelicula = document.querySelector('#añadir_pelicula');

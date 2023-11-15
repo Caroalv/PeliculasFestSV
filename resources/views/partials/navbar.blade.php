@@ -43,9 +43,9 @@
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                             <a class="dropdown-item" href="{{ route('genres.index') }}"> Géneros</a>
-                            <a class="dropdown-item" href="{{ route('directors.index') }}"> Directores</a>
                             <a class="dropdown-item" href="{{ route('countries.index') }}"> Países</a>
                             <a class="dropdown-item" href="{{ route('languages.index') }}"> Idiomas</a>
+                            <a class="dropdown-item" href="{{ route('directors.index') }}"> Directores</a>
                         </div>
                     </li>
                 </ul>

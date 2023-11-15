@@ -3,23 +3,30 @@
 @section('title', 'Editar País')
 
 @section('content')
-@if(auth()->user()->hasRole('admin'))
+<div class="container mt-4">
+    @if(auth()->user()->hasRole('admin'))
+        <div class="card">
+            <div class="card-header">
+                <h1 class="card-title">Editar País</h1>
+            </div>
+            <div class="card-body">
+                <form action="{{ route('countries.update', $country->id) }}" method="POST">
+                    @csrf
+                    @method('PUT')
 
-    <h2>Editar País</h2>
+                    <div class="form-group">
+                        <label for="name">Nombre del País</label>
+                        <input type="text" name="name" id="name" class="form-control" value="{{ $country->name }}" required>
+                    </div>
 
-    <form action="{{ route('countries.update', $country->id) }}" method="POST">
-        @csrf
-        @method('PUT')
-        <div class="form-group">
-            <label for="name">Nombre</label>
-            <input type="text" name="name" id="name" class="form-control" value="{{ $country->name }}">
+                    <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+                </form>
+            </div>
         </div>
-        <button type="submit" class="btn btn-primary">Guardar cambios</button>
-    </form>
     @else
-        <br>
-        <div class="alert alert-danger" role="alert">
-            No tienes permisos para acceder a esta página.
+        <div class="alert alert-danger mt-3" role="alert">
+            <strong>Error:</strong> No tienes permisos para acceder a esta página.
         </div>
     @endif
+</div>
 @endsection

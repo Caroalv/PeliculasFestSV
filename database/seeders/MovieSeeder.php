@@ -15,7 +15,7 @@ class MovieSeeder extends Seeder
     private $arrayPeliculas = array(
         array(
             'title' => 'El Padrino',
-            'gender' => 'Drama/Crimen',
+            'gender' => 'Drama',
             'year' => '1972',
             'classification' => '+18',
             'director' => 'Francis Ford Coppola',
@@ -28,7 +28,7 @@ class MovieSeeder extends Seeder
         ),
         array(
             'title' => 'La Vida es Bella',
-            'gender' => 'Comedia/Drama',
+            'gender' => 'Drama',
             'year' => '1997',
             'classification' => 'PG',
             'director' => 'Roberto Benigni',
@@ -43,7 +43,7 @@ class MovieSeeder extends Seeder
     
         array(
             'title' => 'El Viaje de Chihiro',
-            'gender' => 'Animación/Fantasía',
+            'gender' => 'Animación',
             'year' => '2001',
             'classification' => 'PG',
             'director' => 'Hayao Miyazaki',
@@ -57,7 +57,7 @@ class MovieSeeder extends Seeder
         
         array(
             'title' => 'Spider-Man: Lejos de Casa',
-            'gender' => 'Acción/Aventura',
+            'gender' => 'Acción',
             'year' => '2019',
             'classification' => '12A',
             'director' => 'Jon Watts',
@@ -71,7 +71,7 @@ class MovieSeeder extends Seeder
     
         array(
             'title' => 'Transformers: El Lado Oscuro de la Luna',
-            'gender' => 'Acción/Ciencia ficción',
+            'gender' => 'Ciencia ficción',
             'year' => '2011',
             'classification' => '12A',
             'director' => 'Michael Bay',
@@ -85,7 +85,7 @@ class MovieSeeder extends Seeder
     
         array(
             'title' => 'El Señor de los Anillos: El Retorno del Rey',
-            'gender' => 'Aventura/Fantasía',
+            'gender' => 'Fantasía',
             'year' => '2003',
             'classification' => '12A',
             'director' => 'Peter Jackson',
@@ -99,7 +99,7 @@ class MovieSeeder extends Seeder
     
         array(
             'title' => 'Capitán América: Civil War',
-            'gender' => 'Acción/Aventura',
+            'gender' => 'Acción',
             'year' => '2016',
             'classification' => '12A',
             'director' => 'Anthony Russo, Joe Russo',
@@ -113,7 +113,7 @@ class MovieSeeder extends Seeder
     
         array(
             'title' => 'Los Minions',
-            'gender' => 'Animación/Comedia',
+            'gender' => 'Animación',
             'year' => '2015',
             'classification' => 'PG',
             'director' => 'Kyle Balda, Pierre Coffin',
@@ -127,7 +127,7 @@ class MovieSeeder extends Seeder
     
         array(
             'title' => 'Iron Man 3',
-            'gender' => 'Acción/Ciencia ficción',
+            'gender' => 'Acción',
             'year' => '2013',
             'classification' => '12A',
             'director' => 'Shane Black',
@@ -155,7 +155,7 @@ class MovieSeeder extends Seeder
     
         array(
             'title' => 'Los Increíbles 2',
-            'gender' => 'Animación/Acción',
+            'gender' => 'Animación',
             'year' => '2018',
             'classification' => 'PG',
             'director' => 'Brad Bird',
@@ -168,7 +168,7 @@ class MovieSeeder extends Seeder
         ),
         array(
             'title' => 'Jurassic World: El Reino Caído',
-            'gender' => 'Acción/Aventura',
+            'gender' => 'Ciencia ficción',
             'year' => '2018',
             'classification' => '12A',
             'director' => 'J.A. Bayona',
@@ -182,7 +182,7 @@ class MovieSeeder extends Seeder
     
         array(
             'title' => 'Star Wars: Episodio VIII - Los últimos Jedi',
-            'gender' => 'Ciencia ficción/Aventura',
+            'gender' => 'Aventura',
             'year' => '2017',
             'classification' => '12A',
             'director' => 'Rian Johnson',
@@ -196,7 +196,7 @@ class MovieSeeder extends Seeder
     
         array(
             'title' => 'Harry Potter y las reliquias de la muerte: parte 2',
-            'gender' => 'Aventura/Fantasía',
+            'gender' => 'Fantasía',
             'year' => '2011',
             'classification' => '12A',
             'director' => 'David Yates',
@@ -210,7 +210,7 @@ class MovieSeeder extends Seeder
     
         array(
             'title' => 'Black Panther',
-            'gender' => 'Acción/Aventura',
+            'gender' => 'Acción',
             'year' => '2018',
             'classification' => '12A',
             'director' => 'Ryan Coogler',
@@ -224,7 +224,7 @@ class MovieSeeder extends Seeder
     
         array(
             'title' => 'Frozen 2',
-            'gender' => 'Animación/Aventura',
+            'gender' => 'Animación',
             'year' => '2019',
             'classification' => 'PG',
             'director' => 'Chris Buck, Jennifer Lee',
@@ -238,7 +238,7 @@ class MovieSeeder extends Seeder
     
         array(
             'title' => 'Top Gun: Maverick',
-            'gender' => 'Acción/Drama',
+            'gender' => 'Drama',
             'year' => '2022',
             'classification' => '12A',
             'director' => 'Joseph Kosinski',
@@ -252,7 +252,7 @@ class MovieSeeder extends Seeder
     
         array(
             'title' => 'Los Vengadores',
-            'gender' => 'Acción/Aventura',
+            'gender' => 'Acción',
             'year' => '2012',
             'classification' => '12A',
             'director' => 'Joss Whedon',
@@ -266,7 +266,7 @@ class MovieSeeder extends Seeder
     
         array(
             'title' => 'El Rey León',
-            'gender' => 'Animación/Aventura',
+            'gender' => 'Animación',
             'year' => '2019',
             'classification' => 'PG',
             'director' => 'Jon Favreau',
@@ -280,7 +280,7 @@ class MovieSeeder extends Seeder
     
         array(
             'title' => 'Jurassic World',
-            'gender' => 'Acción/Aventura',
+            'gender' => 'Aventura',
             'year' => '2015',
             'classification' => '12A',
             'director' => 'Colin Trevorrow',
@@ -294,7 +294,7 @@ class MovieSeeder extends Seeder
     
         array(
             'title' => 'Vengadores: Infinity War',
-            'gender' => 'Acción/Aventura',
+            'gender' => 'Aventura',
             'year' => '2018',
             'classification' => '12A',
             'director' => 'Anthony Russo, Joe Russo',
@@ -308,7 +308,7 @@ class MovieSeeder extends Seeder
     
         array(
             'title' => 'Titanic',
-            'gender' => 'Drama/Romance',
+            'gender' => 'Drama',
             'year' => '1997',
             'classification' => '12A',
             'director' => 'James Cameron',
@@ -322,7 +322,7 @@ class MovieSeeder extends Seeder
     
         array(
             'title' => 'Avatar',
-            'gender' => 'Ciencia ficción/Aventura',
+            'gender' => 'Ciencia ficción',
             'year' => '2009',
             'classification' => '12A',
             'director' => 'James Cameron',
@@ -335,7 +335,7 @@ class MovieSeeder extends Seeder
         ),
         array(
             'title' => 'La Bella y la Bestia',
-            'gender' => 'Fantasía/Musical',
+            'gender' => 'Fantasía',
             'year' => '2017',
             'classification' => 'PG',
             'director' => 'Bill Condon',

@@ -25,16 +25,14 @@
                     @foreach($peliculas as $pelicula)
                         <tr>
                             <td>{{ $pelicula->title }}</td>
-                            <td>{{ $pelicula->gender }}</td>
+                            <td>{{ $pelicula->genre->name }}</td>
                             <td>{{ $pelicula->year }}</td>
                             <td>{{ $pelicula->classification }}</td>
                             <td>{{ $pelicula->director->name }}</td>
                             <td>
-                                @if($pelicula->rented)
-                                    Alquilada
-                                @else
-                                    Disponible
-                                @endif
+                                <span class="badge {{ $pelicula->rented ? 'badge-danger' : 'badge-success' }}" style="font-size: 1.2em;">
+                                    {{ $pelicula->rented ? 'Alquilada' : 'Disponible' }}
+                                </span>
                             </td>
                         </tr>
                     @endforeach
