@@ -2,108 +2,116 @@
 
 namespace App\Http\Controllers;
 use App\Movie;
+use App\Models\Genre;
+use App\Models\Country;
+use App\Models\Director;
+use App\Models\Language;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class CatalogController extends Controller
 {
-    // Array de películas (no utilizado en el código actual)
-    private $arrayPeliculas = array(
-        array(
-            // Detalles de una película
-            'title' => 'El padrino',
-            'gender' => 'Accion',
-            'year' => '1972',
-            'classification' => '18',
-            'director' => 'Francis Ford Coppola',
-            'poster' => 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQq_qdHarij8GQCHNSwTp-EefWqC-q-QjdFLw&usqp=CAU',
-            'rented' => false,
-            'synopsis' => 'Don Vito Corleone (Marlon Brando) es el respetado y temido jefe de una de las cinco familias de la mafia de Nueva York...',
-            'original_language' => 'Italiano',
-            'movie_url' => 'https://youtu.be/v72XprPxy3E?si=a0cB3b7ZyQAljZdt'
-        )
-    );
-
-    // Método para crear una película
-    public function postCreate(Request $data){
+    public function postCreate(Request $data)
+    {
         Movie::create([
             'title' => $data['title'],
-            'gender' => $data['gender'],
+            'genre_id' => $data['genre_id'],
             'year' => $data['year'],
             'classification' => $data['classification'],
-            'director' => $data['director'],
+            'director_id' => $data['director_id'], // Asegúrate de incluir el valor para director_id
             'poster' => $data['poster'],
             'synopsis' => $data['synopsis'],
-            'country' => $data['country'],
-            'original_language' => $data['original_language'],
+            'country_id' => $data['country_id'],
+            'language_id' => $data['language_id'],
             'movie_url' => $data['movie_url'],
             'rented' => false
         ]);
-
-        // Redirige a la página principal del catálogo después de crear la película
+    
         return $this->getIndex();
     }
-
-    // Método para editar una película
-    public function edit(Request $request, $id){
+    
+    
+    
+    public function edit(Request $request, $id)
+    {
         $movie = Movie::findOrFail($id);
+    
         $movie->title = $request->input('title');
-        $movie->gender = $request->input('gender');
+        $movie->genre_id = $request->input('genre_id');
         $movie->year = $request->input('year');
         $movie->classification = $request->input('classification');
-        $movie->director = $request->input('director');
+        $movie->director_id = $request->input('director_id'); // Asegúrate de incluir el valor para director_id
         $movie->poster = $request->input('poster');
         $movie->synopsis = $request->input('synopsis');
-        $movie->country = $request->input('country');
-        $movie->original_language = $request->input('original_language');
+        $movie->country_id = $request->input('country_id');
+        $movie->language_id = $request->input('language_id');
         $movie->movie_url = $request->input('movie_url');
         $movie->save();
-        // Redirige a la página de detalles de la película después de editar
+    
         return redirect()->route('catalog.show', ['id' => $id]);
     }
+    
+    
 
-    // Método para obtener todas las películas y mostrarlas en la vista principal
-    public function getIndex(){
-        $peliculas = Movie::all();
-        return view('catalog.index', array('peliculas' => $peliculas));
-    }
+        public function getIndex(){
+            $peliculas = Movie::all();
+            $genres = Genre::all();
+            $countries = Country::all();
+            $directors = Director::all();
+            $languages = Language::all();
+        
+            return view('catalog.index', compact('peliculas', 'genres', 'countries', 'directors', 'languages'));
+        }
+        
+        
+        public function getShow($id){
+            try {
+                $pelicula = Movie::findOrFail($id);
+                return view('catalog.show', compact('pelicula'));
+            } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
+                // Manejar el caso en que la película no es encontrada
+                // Puedes redirigir al usuario o mostrar un mensaje de error
+                return redirect()->route('catalog.index')->with('error', 'Película no encontrada.');
+            }
+        }
+        
 
-    // Método para mostrar los detalles de una película específica
-    public function getShow($id){
-        $pelicula = Movie::findOrFail($id);
-        return view('catalog.show', array('pelicula' => $pelicula));
-    }
-
-    // Método para mostrar la vista de creación de una película
     public function getCreate(){
-        return view('catalog.create');
+        $genres = Genre::all();
+        $countries = Country::all();
+        $directors = Director::all();
+        $languages = Language::all();
+    
+        return view('catalog.create', compact('genres', 'countries', 'directors', 'languages'));
     }
+    
 
-    // Método para mostrar la vista de edición de una película
+
     public function getEdit($id){
         $pelicula = Movie::findOrFail($id);
-        return view('catalog.edit', array('pelicula' => $pelicula));
+        $directors = Director::all(); // Obtén la lista de directores
+        $genres = Genre::all(); // Obtén la lista de géneros
+        $countries = Country::all(); // Obtén la lista de países
+        $languages = Language::all(); // Obtén la lista de idiomas
+    
+        return view('catalog.edit', compact('pelicula', 'directors', 'genres', 'countries', 'languages'));
     }
-
-    // Método para cambiar el estado de alquiler de una película a true
+    
+    
     public function putRent($id)
     {
         $movie = Movie::findOrFail( $id );
         $movie->rented = true;
         $movie->save();
-        return view('catalog.show', array( 'pelicula' => $movie));
+        return view('catalog.show',array( 'pelicula' => $movie));
     }
-
-    // Método para cambiar el estado de alquiler de una película a false
     public function putReturn($id)
     {
         $movie = Movie::findOrFail( $id );
         $movie->rented = false;
         $movie->save();
-        return view('catalog.show', array( 'pelicula' => $movie));
+        return view('catalog.show',array( 'pelicula' => $movie));
     }
-
-    // Método para eliminar una película de la base de datos
     public function deleteMovie($id)
     {
         $movie = Movie::findOrFail( $id );
@@ -111,32 +119,31 @@ class CatalogController extends Controller
         return $this->getIndex();
     }
 
-    // Método para listar todas las películas
     public function listarPeliculas()
     {
-        $movies = Movie::all(); 
-        return view('catalog.lista', ['peliculas' => $movies]); 
+        $movies = Movie::all(); // Cambiado de $movie a $movies
+        return view('catalog.lista', ['peliculas' => $movies]); // Cambiado de 'pelicula' a 'peliculas'
     }
 
-    // Método para mostrar estadísticas en una vista de gráficos
     public function mostrarGrafico()
     {
         $alquiladas = Movie::where('rented', true)->count();
         $disponibles = Movie::where('rented', false)->count();
-    
-        $generos = Movie::select('gender', DB::raw('count(*) as total'))
-            ->groupBy('gender')
-            ->get();
+
     
         $clasificacionPeliculas = Movie::select('classification', DB::raw('count(*) as cantidad'))
             ->groupBy('classification')
             ->get();
     
-        return view('catalog.grafica', compact('alquiladas', 'disponibles', 'generos', 'clasificacionPeliculas'));
+        return view('catalog.grafica', compact('alquiladas', 'disponibles', 'clasificacionPeliculas'));
     }
+    
+    
 
-    // Método para buscar películas por título
-    public function buscarPeliculas(Request $request)
+
+
+
+        public function buscarPeliculas(Request $request)
     {
         $query = $request->input('query');
         $peliculas = Movie::where('title', 'LIKE', "%$query%")->get();
@@ -144,5 +151,8 @@ class CatalogController extends Controller
         // Puedes pasar las películas encontradas a una vista
         return view('catalog.search', ['peliculas' => $peliculas]);
     }
-}
 
+
+  
+
+}
