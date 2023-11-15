@@ -58,95 +58,104 @@
 </div>
 
 <script>
-    var alquiladas = <?php echo $alquiladas; ?>;
-    var disponibles = <?php echo $disponibles; ?>;
-    var datosPeliculasAlquiladas = [alquiladas, disponibles];
-    var etiquetasPeliculasAlquiladas = ['Alquiladas', 'Disponibles'];
+   // Obtener datos de películas alquiladas y disponibles
+var alquiladas = <?php echo $alquiladas; ?>;//está tomando un valor almacenado en la variable
+var disponibles = <?php echo $disponibles; ?>;
+var datosPeliculasAlquiladas = [alquiladas, disponibles];  //Aquí se crea un array en JavaScript llamado datosPeliculasAlquiladas que contiene los valores de alquiladas y disponibles.
+var etiquetasPeliculasAlquiladas = ['Alquiladas', 'Disponibles'];//Se crea un array llamado etiquetasPeliculasAlquiladas que contiene las etiquetas para el gráfico.
 
-    var generos = <?php echo json_encode($generos); ?>;
-    var etiquetasGeneros = generos.map(function (item) {
-        return item.gender;
-    });
-    var datosPeliculasGenero = generos.map(function (item) {
-        return item.total;
-    });
+// Obtener datos de géneros de películas
+var generos = <?php echo json_encode($generos); ?>;
+var etiquetasGeneros = generos.map(function (item) { //crea un nuevo array llamado etiquetasGeneros que contiene los valores de la propiedad gender(generos) 
+    return item.gender;
+});
+var datosPeliculasGenero = generos.map(function (item) {
+    return item.total;
+});
 
-    var clasificacionPeliculas = <?php echo json_encode($clasificacionPeliculas); ?>;
-    var etiquetasClasificacion = clasificacionPeliculas.map(function (item) {
-        return item.classification;
-    });
-    var datosClasificacion = clasificacionPeliculas.map(function (item) {
-        return item.cantidad;
-    });
+// Obtener datos de clasificación de películas
+var clasificacionPeliculas = <?php echo json_encode($clasificacionPeliculas); ?>;
+var etiquetasClasificacion = clasificacionPeliculas.map(function (item) {
+    return item.classification;
+});
+var datosClasificacion = clasificacionPeliculas.map(function (item) {
+    return item.cantidad;
+});
 
-    var configuracionPeliculasAlquiladas = {
-        type: 'bar',
-        data: {
-            labels: etiquetasPeliculasAlquiladas,
-            datasets: [{
-                label: 'Películas Alquiladas vs Disponibles',
-                data: datosPeliculasAlquiladas,
-                backgroundColor: ['green', 'red']
-            }]
-        },
-        options: {
-            responsive: true,
-            scales: {
-                y: {
-                    beginAtZero: true
-                }
+// Configuración del gráfico de películas alquiladas
+var configuracionPeliculasAlquiladas = {
+    type: 'bar',
+    data: {
+        labels: etiquetasPeliculasAlquiladas, //etiqueta para el grafico 
+        datasets: [{  //etiqueta del conjunto de datos
+            label: 'Películas Alquiladas vs Disponibles',
+            data: datosPeliculasAlquiladas, //datos los cuales se utilizaran en la grafica
+            backgroundColor: ['green', 'red']
+        }]
+    },
+    options: {
+        responsive: true,
+        scales: {
+            y: {
+                beginAtZero: true
             }
         }
-    };
+    }
+};
 
-    var configuracionPeliculasGenero = {
-        type: 'bar',
-        data: {
-            labels: etiquetasGeneros,
-            datasets: [{
-                label: 'Cantidad',
-                data: datosPeliculasGenero,
-                backgroundColor: 'purple' // Cambiado a un solo color para simplificar
-            }]
-        },
-        options: {
-            responsive: true,
-            scales: {
-                y: {
-                    beginAtZero: true
-                }
+// Configuración del gráfico de géneros de películas
+var configuracionPeliculasGenero = {
+    type: 'bar',
+    data: {
+        labels: etiquetasGeneros,
+        datasets: [{
+            label: 'Cantidad',
+            data: datosPeliculasGenero,
+            backgroundColor: 'purple' // Cambiado a un solo color para simplificar
+        }]
+    },
+    options: {
+        responsive: true,
+        scales: {
+            y: {
+                beginAtZero: true
             }
         }
-    };
+    }
+};
 
-    var configuracionClasificacionPeliculas = {
-        type: 'bar',
-        data: {
-            labels: etiquetasClasificacion,
-            datasets: [{
-                label: 'Cantidad',
-                data: datosClasificacion,
-                backgroundColor: ['blue', 'green', 'purple', 'black'] // Colores diferentes para cada barra
-            }]
-        },
-        options: {
-            responsive: true,
-            scales: {
-                y: {
-                    beginAtZero: true
-                }
+// Configuración del gráfico de clasificación de películas
+var configuracionClasificacionPeliculas = {
+    type: 'bar',
+    data: {
+        labels: etiquetasClasificacion,
+        datasets: [{
+            label: 'Cantidad',
+            data: datosClasificacion,
+            backgroundColor: ['blue', 'green', 'purple', 'black'] // Colores diferentes para cada barra
+        }]
+    },
+    options: {
+        responsive: true,
+        scales: {
+            y: {
+                beginAtZero: true
             }
         }
-    };
+    }
+};
 
-    var ctxPeliculasAlquiladas = document.getElementById('graficoPeliculasAlquiladas').getContext('2d');
-    var miGraficoPeliculasAlquiladas = new Chart(ctxPeliculasAlquiladas, configuracionPeliculasAlquiladas);
+// Crear instancias de Chart.js para cada gráfico
+var ctxPeliculasAlquiladas = document.getElementById('graficoPeliculasAlquiladas').getContext('2d'); //: Esto busca en el documento HTML el elemento con el ID 'graficoPeliculasAlquiladas'
+var miGraficoPeliculasAlquiladas = new Chart(ctxPeliculasAlquiladas, configuracionPeliculasAlquiladas); //Aquí se crea una nueva instancia de la clase Chart proporcionada por la librería Chart.js. Se le pasa el contexto de renderizado (ctxPeliculasAlquiladas) 
+                                                                                                        //y la configuración del gráfico (configuracionPeliculasAlquiladas).
 
-    var ctxPeliculasGenero = document.getElementById('graficoPeliculasGenero').getContext('2d');
-    var miGraficoPeliculasGenero = new Chart(ctxPeliculasGenero, configuracionPeliculasGenero);
+var ctxPeliculasGenero = document.getElementById('graficoPeliculasGenero').getContext('2d');
+var miGraficoPeliculasGenero = new Chart(ctxPeliculasGenero, configuracionPeliculasGenero);
 
-    var ctxClasificacionPeliculas = document.getElementById('graficoClasificacionPeliculas').getContext('2d');
-    var miGraficoClasificacionPeliculas = new Chart(ctxClasificacionPeliculas, configuracionClasificacionPeliculas);
+var ctxClasificacionPeliculas = document.getElementById('graficoClasificacionPeliculas').getContext('2d');
+var miGraficoClasificacionPeliculas = new Chart(ctxClasificacionPeliculas, configuracionClasificacionPeliculas);
+
 </script>
 
 
