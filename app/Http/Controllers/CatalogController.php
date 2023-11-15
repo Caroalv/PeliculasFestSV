@@ -2,87 +2,101 @@
 
 namespace App\Http\Controllers;
 use App\Movie;
+use App\Models\Genre;
+use App\Models\Country;
+use App\Models\Director;
+use App\Models\Language;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class CatalogController extends Controller
 {
-    private $arrayPeliculas = array(
-        array(
-            'title' => 'El padrino',
-            'gender' => 'Accion',
-            'year' => '1972',
-            'classification' => '18',
-            'director' => 'Francis Ford Coppola',
-            'poster' => 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQq_qdHarij8GQCHNSwTp-EefWqC-q-QjdFLw&usqp=CAU',
-            'rented' => false,
-            'synopsis' => 'Don Vito Corleone (Marlon Brando) es el respetado y temido jefe de una de las cinco familias de la mafia de Nueva York. Tiene cuatro hijos: Connie (Talia Shire), el impulsivo Sonny (James Caan), el pusilánime Freddie (John Cazale) y Michael (Al Pacino), que no quiere saber nada de los negocios de su padre. Cuando Corleone, en contra de los consejos de \'Il consigliere\' Tom Hagen (Robert Duvall), se niega a intervenir en el negocio de las drogas, el jefe de otra banda ordena su asesinato. Empieza entonces una violenta y cruenta guerra entre las familias mafiosas.',
-            'original_language' => 'Italiano',
-            'movie_url' => 'https://youtu.be/v72XprPxy3E?si=a0cB3b7ZyQAljZdt'
-            )
-    );
-    public function postCreate(Request $data){
+    public function postCreate(Request $data)
+    {
         Movie::create([
             'title' => $data['title'],
-            'gender' => $data['gender'],
+            'genre_id' => $data['genre_id'],
             'year' => $data['year'],
             'classification' => $data['classification'],
-            'director' => $data['director'], // Campo añadido
+            'director_id' => $data['director_id'], // Asegúrate de incluir el valor para director_id
             'poster' => $data['poster'],
             'synopsis' => $data['synopsis'],
-            'country' => $data['country'],
-            'original_language' => $data['original_language'],
+            'country_id' => $data['country_id'],
+            'language_id' => $data['language_id'],
             'movie_url' => $data['movie_url'],
             'rented' => false
-            ]);
-            // $movie = new Movie;
-            // dd($movie);
-            // $movie->title = $request->input('title');
-            // $movie->year = $request->input('year');
-            // $movie->director = $request->input('director');
-            // $movie->poster = $request->input('poster');
-            // $movie->synopsis = $request->input('synopsis');
-            // $movie->save();
-            return $this->getIndex();
+        ]);
+    
+        return $this->getIndex();
     }
-    public function edit(Request $request, $id){
-        $movie=Movie::findOrFail($id);
-       // dd($movie);
+    
+    
+    
+    public function edit(Request $request, $id)
+    {
+        $movie = Movie::findOrFail($id);
+    
         $movie->title = $request->input('title');
-        $movie->gender = $request->input('gender');
+        $movie->genre_id = $request->input('genre_id');
         $movie->year = $request->input('year');
         $movie->classification = $request->input('classification');
-        $movie->director = $request->input('director');
+        $movie->director_id = $request->input('director_id'); // Asegúrate de incluir el valor para director_id
         $movie->poster = $request->input('poster');
         $movie->synopsis = $request->input('synopsis');
-        $movie->country = $request->input('country');
-        $movie->original_language = $request->input('original_language');
+        $movie->country_id = $request->input('country_id');
+        $movie->language_id = $request->input('language_id');
         $movie->movie_url = $request->input('movie_url');
         $movie->save();
-       // return view('catalog.index');
-       return redirect()->route('catalog.show', ['id' => $id]);
+    
+        return redirect()->route('catalog.show', ['id' => $id]);
+    }
+    
+    
+
+        public function getIndex(){
+            $peliculas = Movie::all();
+            $genres = Genre::all();
+            $countries = Country::all();
+            $directors = Director::all();
+            $languages = Language::all();
+        
+            return view('catalog.index', compact('peliculas', 'genres', 'countries', 'directors', 'languages'));
         }
-
-    public function getIndex(){
-        $peliculas=Movie::all();
-        //dd($arrayPeliculas);
-        return view('catalog.index', array( 'peliculas' => $peliculas));
-    }
-
-    public function getShow($id){
-        $pelicula=Movie::findOrFail($id);
-        return view('catalog.show',array( 'pelicula' => $pelicula));
-
-    }
+        
+        
+        public function getShow($id){
+            try {
+                $pelicula = Movie::findOrFail($id);
+                return view('catalog.show', compact('pelicula'));
+            } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
+                // Manejar el caso en que la película no es encontrada
+                // Puedes redirigir al usuario o mostrar un mensaje de error
+                return redirect()->route('catalog.index')->with('error', 'Película no encontrada.');
+            }
+        }
+        
 
     public function getCreate(){
-        return view('catalog.create');
+        $genres = Genre::all();
+        $countries = Country::all();
+        $directors = Director::all();
+        $languages = Language::all();
+    
+        return view('catalog.create', compact('genres', 'countries', 'directors', 'languages'));
     }
+    
+
 
     public function getEdit($id){
-        $pelicula=Movie::findOrFail($id);
-        return view('catalog.edit', array('pelicula'=>$pelicula));
+        $pelicula = Movie::findOrFail($id);
+        $directors = Director::all(); // Obtén la lista de directores
+        $genres = Genre::all(); // Obtén la lista de géneros
+        $countries = Country::all(); // Obtén la lista de países
+        $languages = Language::all(); // Obtén la lista de idiomas
+    
+        return view('catalog.edit', compact('pelicula', 'directors', 'genres', 'countries', 'languages'));
     }
+    
     
     public function putRent($id)
     {
@@ -115,17 +129,15 @@ class CatalogController extends Controller
     {
         $alquiladas = Movie::where('rented', true)->count();
         $disponibles = Movie::where('rented', false)->count();
-    
-        $generos = Movie::select('gender', DB::raw('count(*) as total'))
-            ->groupBy('gender')
-            ->get();
+
     
         $clasificacionPeliculas = Movie::select('classification', DB::raw('count(*) as cantidad'))
             ->groupBy('classification')
             ->get();
     
-        return view('catalog.grafica', compact('alquiladas', 'disponibles', 'generos', 'clasificacionPeliculas'));
+        return view('catalog.grafica', compact('alquiladas', 'disponibles', 'clasificacionPeliculas'));
     }
+    
     
 
 
@@ -144,4 +156,3 @@ class CatalogController extends Controller
   
 
 }
-
