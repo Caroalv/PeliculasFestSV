@@ -27,7 +27,7 @@ class CatalogController extends Controller
             'rented' => false
         ]);
     
-        return $this->getIndex();
+        //return $this->getIndex();
     }
     
     
@@ -131,7 +131,7 @@ class CatalogController extends Controller
     {
         $movie = Movie::findOrFail( $id );
         $movie->delete();
-        return $this->getIndex();
+        //return $this->getIndex();
     }
 
     public function listarPeliculas()
