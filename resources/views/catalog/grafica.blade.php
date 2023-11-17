@@ -56,14 +56,6 @@
     var datosPeliculasAlquiladas = [alquiladas, disponibles];
     var etiquetasPeliculasAlquiladas = ['Alquiladas', 'Disponibles'];
 
-    var generos = <?php echo json_encode($generos); ?>;
-    var etiquetasGeneros = generos.map(function (item) {
-        return item.gender;
-    });
-    var datosPeliculasGenero = generos.map(function (item) {
-        return item.total;
-    });
-
 // Obtener datos de clasificación de películas
 var clasificacionPeliculas = <?php echo json_encode($clasificacionPeliculas); ?>;
 var etiquetasClasificacion = clasificacionPeliculas.map(function (item) {
@@ -81,26 +73,6 @@ var datosClasificacion = clasificacionPeliculas.map(function (item) {
                 label: 'Películas Alquiladas vs Disponibles',
                 data: datosPeliculasAlquiladas,
                 backgroundColor: ['green', 'red']
-            }]
-        },
-        options: {
-            responsive: true,
-            scales: {
-                y: {
-                    beginAtZero: true
-                }
-            }
-        }
-    };
-
-    var configuracionPeliculasGenero = {
-        type: 'bar',
-        data: {
-            labels: etiquetasGeneros,
-            datasets: [{
-                label: 'Cantidad',
-                data: datosPeliculasGenero,
-                backgroundColor: 'purple' // Cambiado a un solo color para simplificar
             }]
         },
         options: {
@@ -135,9 +107,6 @@ var datosClasificacion = clasificacionPeliculas.map(function (item) {
 
     var ctxPeliculasAlquiladas = document.getElementById('graficoPeliculasAlquiladas').getContext('2d');
     var miGraficoPeliculasAlquiladas = new Chart(ctxPeliculasAlquiladas, configuracionPeliculasAlquiladas);
-
-    var ctxPeliculasGenero = document.getElementById('graficoPeliculasGenero').getContext('2d');
-    var miGraficoPeliculasGenero = new Chart(ctxPeliculasGenero, configuracionPeliculasGenero);
 
 var ctxClasificacionPeliculas = document.getElementById('graficoClasificacionPeliculas').getContext('2d');
 var miGraficoClasificacionPeliculas = new Chart(ctxClasificacionPeliculas, configuracionClasificacionPeliculas);
