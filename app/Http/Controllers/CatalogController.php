@@ -53,15 +53,30 @@ class CatalogController extends Controller
     
     
 
-        public function getIndex(){
-            $peliculas = Movie::all();
-            $genres = Genre::all();
-            $countries = Country::all();
-            $directors = Director::all();
-            $languages = Language::all();
-        
-            return view('catalog.index', compact('peliculas', 'genres', 'countries', 'directors', 'languages'));
+    public function getIndex(Request $request)
+    {
+        $query = Movie::query();
+
+
+        if ($request->filled('category')) {
+            $query->whereHas('genre', function ($q) use ($request) {
+                $q->where('name', $request->input('category'));
+            });
         }
+    
+        if ($request->filled('classification')) {
+            $query->where('classification', $request->input('classification'));
+        }
+    
+        // Obtén las películas filtradas
+        $peliculas = $query->get();
+        $genres = Genre::all();
+        $countries = Country::all();
+        $directors = Director::all();
+        $languages = Language::all();
+    
+        return view('catalog.index', compact('peliculas', 'genres', 'countries', 'directors', 'languages'));
+    }
         
         
         public function getShow($id){

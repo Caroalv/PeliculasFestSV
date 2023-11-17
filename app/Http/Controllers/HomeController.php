@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Movie;
 
 use Illuminate\Http\Request;
 
@@ -23,6 +24,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        // Obtén todas las películas con sus relaciones cargadas
+        $peliculas = Movie::with(['director', 'genre', 'country', 'language'])->get();
+
+        return view('home', compact('peliculas'));
     }
 }
