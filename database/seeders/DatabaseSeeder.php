@@ -1,12 +1,21 @@
 <?php
 
-use Database\Seeders\RolesTableSeeder;
-use Database\Seeders\RoleUserTableSeeder;
-use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
+use App\Movie;
 use App\Models\Role;
 use App\Models\User;
-use App\Movie;
+use App\Models\Genre;
+use App\Models\Country;
+use App\Models\Director;
+use App\Models\Language;
+use Illuminate\Database\Seeder;
+use Database\Seeders\GenreSeeder;
+use Database\Seeders\MovieSeeder;
+use Illuminate\Support\Facades\DB;
+use Database\Seeders\CountrySeeder;
+use Database\Seeders\DirectorSeeder;
+use Database\Seeders\LanguageSeeder;
+use Database\Seeders\RolesTableSeeder;
+use Database\Seeders\RoleUserTableSeeder;
 
 class DatabaseSeeder extends Seeder{
     /**
@@ -31,6 +40,8 @@ class DatabaseSeeder extends Seeder{
             'password' => bcrypt('usuario2023'),
         ]);
     }
+
+
 
     private function assignAdminRole()
     {
@@ -60,6 +71,13 @@ class DatabaseSeeder extends Seeder{
 
         $this->call(RolesTableSeeder::class);
         $this->call(RoleUserTableSeeder::class);
+        $this->call(GenreSeeder::class);
+        $this->call(LanguageSeeder::class);
+        $this->call(DirectorSeeder::class);
+        $this->call(CountrySeeder::class);
+        $this->call(MovieSeeder::class);
+
+
 
     }
 }

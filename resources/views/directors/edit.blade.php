@@ -3,16 +3,30 @@
 @section('title', 'Editar Director')
 
 @section('content')
-    <h2>Editar Director</h2>
+<div class="container mt-4">
+    @if(auth()->user()->hasRole('admin'))
+        <div class="card">
+            <div class="card-header">
+                <h1 class="card-title">Editar Director</h1>
+            </div>
+            <div class="card-body">
+                <form action="{{ route('directors.update', $director->id) }}" method="POST">
+                    @csrf
+                    @method('PUT')
 
-    <form action="{{ route('directors.update', $director->id) }}" method="POST">
-        @csrf
-        @method('PUT')
-        <div class="form-group">
-            <label for="name">Nombre</label>
-            <input type="text" name="name" id="name" class="form-control" value="{{ $director->name }}">
+                    <div class="form-group">
+                        <label for="name">Nombre del Director</label>
+                        <input type="text" name="name" id="name" class="form-control" value="{{ $director->name }}" required>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+                </form>
+            </div>
         </div>
-        <button type="submit" class="btn btn-primary">Guardar cambios</button>
-    </form>
+    @else
+        <div class="alert alert-danger mt-3" role="alert">
+            <strong>Error:</strong> No tienes permisos para acceder a esta página.
+        </div>
+    @endif
+</div>
 @endsection
-

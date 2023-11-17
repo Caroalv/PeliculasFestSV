@@ -76,7 +76,6 @@ class CatalogController extends Controller
         }
         
 
-    // Método para mostrar la vista de creación de una película
     public function getCreate(){
         $genres = Genre::all();
         $countries = Country::all();
@@ -88,7 +87,6 @@ class CatalogController extends Controller
     
 
 
-    // Método para mostrar la vista de edición de una película
     public function getEdit($id){
         $pelicula = Movie::findOrFail($id);
         $directors = Director::all(); // Obtén la lista de directores
@@ -105,19 +103,15 @@ class CatalogController extends Controller
         $movie = Movie::findOrFail( $id );
         $movie->rented = true;
         $movie->save();
-        return view('catalog.show', array( 'pelicula' => $movie));
+        return view('catalog.show',array( 'pelicula' => $movie));
     }
-
-    // Método para cambiar el estado de alquiler de una película a false
     public function putReturn($id)
     {
         $movie = Movie::findOrFail( $id );
         $movie->rented = false;
         $movie->save();
-        return view('catalog.show', array( 'pelicula' => $movie));
+        return view('catalog.show',array( 'pelicula' => $movie));
     }
-
-    // Método para eliminar una película de la base de datos
     public function deleteMovie($id)
     {
         $movie = Movie::findOrFail( $id );
@@ -125,14 +119,12 @@ class CatalogController extends Controller
         return $this->getIndex();
     }
 
-    // Método para listar todas las películas
     public function listarPeliculas()
     {
-        $movies = Movie::all(); 
-        return view('catalog.lista', ['peliculas' => $movies]); 
+        $movies = Movie::all(); // Cambiado de $movie a $movies
+        return view('catalog.lista', ['peliculas' => $movies]); // Cambiado de 'pelicula' a 'peliculas'
     }
 
-    // Método para mostrar estadísticas en una vista de gráficos
     public function mostrarGrafico()
     {
         $alquiladas = Movie::where('rented', true)->count();
@@ -148,8 +140,10 @@ class CatalogController extends Controller
     
     
 
-    // Método para buscar películas por título
-    public function buscarPeliculas(Request $request)
+
+
+
+        public function buscarPeliculas(Request $request)
     {
         $query = $request->input('query');
         $peliculas = Movie::where('title', 'LIKE', "%$query%")->get();

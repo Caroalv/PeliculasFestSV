@@ -26,11 +26,14 @@
                             <span>Grafica</span>
                         </a>
                     </li>
+                    
+                    @if(auth()->user()->hasRole('admin'))
                     <li class="nav-item {{  Request::is('catalog/create') ? 'active' : ''}}">
                         <a class="nav-link" style="color:#ffffff" href="{{url('/catalog/create')}}">
                             <span>&#10010</span> Nueva película
                         </a>
                     </li>
+                    @endif
                 </ul>
 
                 <ul class="navbar-nav ml-auto">
@@ -40,9 +43,9 @@
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                             <a class="dropdown-item" href="{{ route('genres.index') }}"> Géneros</a>
-                            <a class="dropdown-item" href="{{ route('directors.index') }}"> Directores</a>
                             <a class="dropdown-item" href="{{ route('countries.index') }}"> Países</a>
                             <a class="dropdown-item" href="{{ route('languages.index') }}"> Idiomas</a>
+                            <a class="dropdown-item" href="{{ route('directors.index') }}"> Directores</a>
                         </div>
                     </li>
                 </ul>

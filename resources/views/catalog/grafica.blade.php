@@ -1,8 +1,8 @@
 @extends('layouts.app')
-@section('title', 'Gráficas de Películas')
-@section('content')
 
-<!-- Agregar un poco de estilo para mejorar la presentación -->
+@section('title', 'Gráficas de Películas')
+
+@section('content')
 <style>
     body {
         font-family: 'Arial', sans-serif;
@@ -30,8 +30,6 @@
     }
 </style>
 
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
 <div class="container">
 
     <div class="chart-container">
@@ -50,20 +48,20 @@
 
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
     var alquiladas = <?php echo $alquiladas; ?>;
     var disponibles = <?php echo $disponibles; ?>;
     var datosPeliculasAlquiladas = [alquiladas, disponibles];
     var etiquetasPeliculasAlquiladas = ['Alquiladas', 'Disponibles'];
 
-// Obtener datos de clasificación de películas
-var clasificacionPeliculas = <?php echo json_encode($clasificacionPeliculas); ?>;
-var etiquetasClasificacion = clasificacionPeliculas.map(function (item) {
-    return item.classification;
-});
-var datosClasificacion = clasificacionPeliculas.map(function (item) {
-    return item.cantidad;
-});
+    var clasificacionPeliculas = <?php echo json_encode($clasificacionPeliculas); ?>;
+    var etiquetasClasificacion = clasificacionPeliculas.map(function (item) {
+        return item.classification;
+    });
+    var datosClasificacion = clasificacionPeliculas.map(function (item) {
+        return item.cantidad;
+    });
 
     var configuracionPeliculasAlquiladas = {
         type: 'bar',
@@ -88,11 +86,11 @@ var datosClasificacion = clasificacionPeliculas.map(function (item) {
     var configuracionClasificacionPeliculas = {
         type: 'bar',
         data: {
-            labels: etiquetasClasificacion,
+            labels: etiquetasPeliculasAlquiladas,
             datasets: [{
-                label: 'Cantidad',
-                data: datosClasificacion,
-                backgroundColor: ['blue', 'green', 'purple', 'black'] // Colores diferentes para cada barra
+                label: 'Películas Alquiladas vs Disponibles',
+                data: datosPeliculasAlquiladas,
+                backgroundColor: ['green', 'red']
             }]
         },
         options: {
@@ -108,9 +106,8 @@ var datosClasificacion = clasificacionPeliculas.map(function (item) {
     var ctxPeliculasAlquiladas = document.getElementById('graficoPeliculasAlquiladas').getContext('2d');
     var miGraficoPeliculasAlquiladas = new Chart(ctxPeliculasAlquiladas, configuracionPeliculasAlquiladas);
 
-var ctxClasificacionPeliculas = document.getElementById('graficoClasificacionPeliculas').getContext('2d');
-var miGraficoClasificacionPeliculas = new Chart(ctxClasificacionPeliculas, configuracionClasificacionPeliculas);
-
+    var ctxClasificacionPeliculas = document.getElementById('graficoClasificacionPeliculas').getContext('2d');
+    var miGraficoClasificacionPeliculas = new Chart(ctxClasificacionPeliculas, configuracionClasificacionPeliculas);
 </script>
 
 @endsection
