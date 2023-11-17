@@ -87,54 +87,63 @@
         });
     </script>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            // Selecciona todos los botones con el ID "devolver_pelicula"
-            const devolver_pelicula = document.querySelector('#devolver_pelicula');
+<script>
+    // Se ejecuta cuando el DOM ha sido completamente cargado
+    document.addEventListener('DOMContentLoaded', function () {
+        // Selecciona el primer botón con el ID "devolver_pelicula"
+        const devolver_pelicula = document.querySelector('#devolver_pelicula');
 
-            devolver_pelicula.addEventListener('click', (event) => {
-                event.preventDefault();
+        // Agrega un evento de clic al botón seleccionado
+        devolver_pelicula.addEventListener('click', (event) => {
+            // Previene el comportamiento predeterminado del evento (enviar el formulario)
+            event.preventDefault();
 
-                const swalWithBootstrapButtons = Swal.mixin({
-                    customClass: {
-                        confirmButton: "btn btn-success",
-                        cancelButton: "btn btn-danger"
-                    },
-                    buttonsStyling: false
-                });
+            // Crea una instancia de Swal (SweetAlert) con personalizaciones de Bootstrap
+            const swalWithBootstrapButtons = Swal.mixin({
+                customClass: {
+                    confirmButton: "btn btn-success", // Clase del botón de confirmación
+                    cancelButton: "btn btn-danger"    // Clase del botón de cancelación
+                },
+                buttonsStyling: false // Desactiva el estilo predeterminado de los botones
+            });
 
-                swalWithBootstrapButtons.fire({
-                    title: "¿Estás seguro?",
-                    text: "No podrás revertir esto",
-                    icon: "warning",
-                    showCancelButton: true,
-                    confirmButtonText: "Sí, devolver película",
-                    cancelButtonText: "No, cancelar",
-                    reverseButtons: true
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        Swal.fire({
-                            position: "center",
-                            icon: "success",
-                            title: "Pelicula devuelta",
-                            showConfirmButton: false,
-                            timer: 15500
-                        });
+            // Muestra una alerta de confirmación personalizada
+            swalWithBootstrapButtons.fire({
+                title: "¿Estás seguro?",           // Título de la alerta
+                text: "No podrás revertir esto",   // Texto descriptivo
+                icon: "warning",                   // Icono de advertencia
+                showCancelButton: true,            // Muestra el botón de cancelar
+                confirmButtonText: "Sí, devolver película", // Texto del botón de confirmación
+                cancelButtonText: "No, cancelar",          // Texto del botón de cancelar
+                reverseButtons: true               // Invierte el orden de los botones (confirmar/cancelar)
+            }).then((result) => { // Ejecuta una función después de que el usuario interactúa con la alerta
+                if (result.isConfirmed) { // Si el usuario hace clic en confirmar
+                    // Muestra una alerta de éxito y realiza la acción de envío del formulario
+                    Swal.fire({
+                        position: "center",
+                        icon: "success",
+                        title: "Pelicula devuelta",
+                        showConfirmButton: false,
+                        timer: 15500
+                    });
 
-                        const form = event.target.closest('form');
-                        form.submit();
-                    } else if (result.dismiss === Swal.DismissReason.cancel) {
-                        swalWithBootstrapButtons.fire({
-                            title: "Cancelado",
-                            text: "La película no ha sido devuelta",
-                            icon: "error"
-                        });
-                    } else if (result.isDenied) {
-                        Swal.fire('Cambios no Guardados', '', 'error');
-                    }
-                });
+                    // Obtiene el formulario más cercano al botón y lo envía
+                    const form = event.target.closest('form');
+                    form.submit();
+                } else if (result.dismiss === Swal.DismissReason.cancel) {
+                    // Si el usuario cancela, muestra una alerta de error
+                    swalWithBootstrapButtons.fire({
+                        title: "Cancelado",
+                        text: "La película no ha sido devuelta",
+                        icon: "error"
+                    });
+                } else if (result.isDenied) {
+                    // Si hay algún error, muestra una alerta de error
+                    Swal.fire('Cambios no Guardados', '', 'error');
+                }
             });
         });
-    </script>
+    });
+</script>
 
 @stop

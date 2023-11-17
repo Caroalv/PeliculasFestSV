@@ -3,7 +3,7 @@
 @section('title', 'Crear película')
 
 @section('content')
-    @if(auth()->user()->hasRole('admin'))
+@if(auth()->user()->hasRole('admin')) 
 
         <div class="row mt-5 justify-content-center">
             <div class="col-md-8">
@@ -96,41 +96,38 @@
                 </div>
             </div>
         </div>
-    @else
-        <div class="alert alert-danger mt-3" role="alert">
-            No tienes permisos para acceder a esta página.
+    @else  
+
+        <div class="alert alert-danger mt-3" role="alert"> 
+            No tienes permisos para acceder a esta página.  
         </div>
-    @endif
 
-    <!-- Agregar SweetAlert y DataTables -->
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const añadir_pelicula = document.querySelector('#añadir_pelicula');
+    @endif 
 
-            añadir_pelicula.addEventListener('click', (event) => {
-                event.preventDefault(); 
-                Swal.fire({
-                    title: '¿Quieres añadir esta película?',
-                    showDenyButton: true,
-                    confirmButtonText: 'Guardar',
-                    denyButtonText: 'No Guardar',
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        Swal.fire({
-                            position: 'center',
-                            icon: 'success',
-                            title: 'Película añadida',
-                            showConfirmButton: false,
-                            timer: 15500
-                        });
-                        const form = event.target.closest('form');
-                        form.submit();
-                    } else if (result.isDenied) {
-                        Swal.fire('Cambios no Guardados', '', 'Ups');
-                    }
+        <!-- Agregar SweetAlert y DataTables -->
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>  
+        <script>  // Inicia el script JavaScript
+            document.addEventListener('DOMContentLoaded', function () {  // Espera a que el DOM esté cargado
+                const añadir_pelicula = document.querySelector('#añadir_pelicula');  // Selecciona el botón de añadir película
+    
+                añadir_pelicula.addEventListener('click', (event) => {  // Agrega un evento clic al botón
+                    event.preventDefault();  // Previene la acción predeterminada del formulario
+                    Swal.fire({  // Muestra un modal SweetAlert
+                        title: '¿Quieres añadir esta película?',  // Título del modal
+                        showDenyButton: true,  // Muestra el botón de denegar
+                        confirmButtonText: 'Guardar',  // Texto del botón de confirmar
+                        denyButtonText: 'No Guardar',  // Texto del botón de denegar
+                    }).then((result) => {  // Maneja la respuesta del usuario
+                        if (result.isConfirmed) {  // Si el usuario confirma
+                            // Muestra un mensaje de éxito y envía el formulario
+                            Swal.fire({ position: 'center', icon: 'success', title: 'Película añadida', showConfirmButton: false, timer: 15500 });
+                            const form = event.target.closest('form');
+                            form.submit();
+                        } else if (result.isDenied) {  // Si el usuario niega
+                            Swal.fire('Cambios no Guardados', '', 'Ups');  // Muestra un mensaje de error
+                        }
+                    });
                 });
             });
-        });
-    </script>
+        </script>
 @stop

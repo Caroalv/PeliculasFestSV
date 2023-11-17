@@ -358,15 +358,26 @@ class MovieSeeder extends Seeder
 
     private function seedCatalog()
     {
+        // Elimina los registros existentes en la tabla 'movies'
         DB::table('movies')->delete();
 
         foreach ($this->arrayPeliculas as $pelicula) {
+            // Busca o crea un registro de género con el nombre proporcionado
             $genre = Genre::firstOrCreate(['name' => $pelicula['gender']]);
+            
+            // Busca o crea un registro de país con el nombre proporcionado
             $country = Country::firstOrCreate(['name' => $pelicula['country']]);
+            
+            // Busca o crea un registro de idioma con el nombre proporcionado
             $language = Language::firstOrCreate(['name' => $pelicula['original_language']]);
+            
+            // Busca o crea un registro de director con el nombre proporcionado
             $director = Director::firstOrCreate(['name' => $pelicula['director']]);
 
+            // Crea una nueva instancia del modelo Movie
             $p = new Movie;
+            
+            // Establece los atributos de la película
             $p->title = $pelicula['title'];
             $p->year = $pelicula['year'];
             $p->classification = $pelicula['classification'];
@@ -375,12 +386,13 @@ class MovieSeeder extends Seeder
             $p->synopsis = $pelicula['synopsis'];
             $p->movie_url = $pelicula['movie_url'];
 
-            // Asignar las relaciones
+            // Asigna las relaciones con los modelos correspondientes
             $p->genre()->associate($genre);
             $p->country()->associate($country);
             $p->language()->associate($language);
             $p->director()->associate($director);
 
+            // Guarda la película en la base de datos
             $p->save();
         }
     }

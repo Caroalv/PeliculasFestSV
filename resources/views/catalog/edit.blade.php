@@ -3,6 +3,7 @@
 @section('title', 'Modificar película')
 
 @section('content')
+@if(auth()->user()->hasRole('admin')) 
 <div class="row mt-5 justify-content-center">
     <div class="col-md-8">
         <div class="card">
@@ -101,7 +102,13 @@
         </div>
     </div>
 </div>
+@else  
 
+<div class="alert alert-danger mt-3" role="alert"> 
+    No tienes permisos para acceder a esta página.  
+</div>
+
+@endif 
 <!-- Agregar SweetAlert -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
