@@ -4,6 +4,11 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CatalogController;
+use App\Http\Controllers\DirectorController;
+use App\Http\Controllers\CountryController;
+use App\Http\Controllers\GenreController;
+use App\Http\Controllers\LanguageController;
+
 use App\Http\Controllers\PaymentController;
 
 
@@ -23,7 +28,7 @@ Route::delete('/catalog/delete/{id}', [CatalogController::class, 'deleteMovie'])
 
 Route::get('catalog/show/{id}', [CatalogController::class, 'getShow']);
 
-Route::get('catalog/create', [CatalogController::class, 'getCreate']);
+Route::get('/catalog/create', [CatalogController::class, 'getCreate'])->name('catalog.create');
 
 Route::post('/catalog/create', [CatalogController::class, 'postCreate']);
 
@@ -48,3 +53,15 @@ Route::get('/catalog/buscar', [CatalogController::class, 'buscarPeliculas'])->na
 
 // Modifica la ruta existente para ver detalles de una película
 Route::get('catalog/show/{id}', [CatalogController::class, 'getShow'])->name('catalog.show');
+
+
+//tablas añadidas
+Route::resource('directors', DirectorController::class);
+Route::resource('countries', CountryController::class);
+Route::resource('genres', GenreController::class);
+Route::resource('languages', LanguageController::class);
+
+
+
+
+

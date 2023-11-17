@@ -17,19 +17,33 @@
                     </li>
                     <li class="nav-item {{ Request::is('catalog/listar') ? 'active' : ''}}">
                         <a class="nav-link" style="color:#ffffff" href="{{url('/catalog/listar')}}">
-                        <span class="glyphicon glyphicon-list" aria-hidden="true"></span>
-                        Lista de Peliculas
-                            </a>
-                       </li>
-                       <li class="nav-item {{  Request::is('catalog/grafica') ? 'active' : ''}}">
+                            <span class="glyphicon glyphicon-list" aria-hidden="true"></span>
+                            Lista de Películas
+                        </a>
+                    </li>
+                    <li class="nav-item {{  Request::is('catalog/grafica') ? 'active' : ''}}">
                         <a class="nav-link" style="color:#ffffff" href="{{url('/catalog/grafica')}}">
-                        </span>Grafica
+                            <span>Grafica</span>
                         </a>
                     </li>
                     <li class="nav-item {{  Request::is('catalog/create') ? 'active' : ''}}">
                         <a class="nav-link" style="color:#ffffff" href="{{url('/catalog/create')}}">
                             <span>&#10010</span> Nueva película
                         </a>
+                    </li>
+                </ul>
+
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" style="color:#ffffff" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Opciones
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <a class="dropdown-item" href="{{ route('genres.index') }}"> Géneros</a>
+                            <a class="dropdown-item" href="{{ route('directors.index') }}"> Directores</a>
+                            <a class="dropdown-item" href="{{ route('countries.index') }}"> Países</a>
+                            <a class="dropdown-item" href="{{ route('languages.index') }}"> Idiomas</a>
+                        </div>
                     </li>
                 </ul>
                 
@@ -39,44 +53,61 @@
                 </form>
                 
                 <ul class="navbar-nav navbar-right">
-                    <li class="nav-item">
-                        <form action="{{ url('/logout') }}" method="POST" style="display:inline">
-                            {{ csrf_field() }}
-                            <button type="submit" class="btn btn-link nav-link" style="color:#ffffff" id="cerrar_sesion" style="display:inline;cursor:pointer">
-                                Cerrar sesión
-                            </button>
-                        </form>
-                    </li>
-                    
+                    <!-- Authentication Links -->
+                    @guest
+                        <li><a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a></li>
+                        <li><a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a></li>
+                    @else
+                        <li class="nav-item dropdown">
+                            <a id="navbarDropdown" style="color:#ffffff" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                {{ Auth::user()->name }} <span class="caret"></span>
+                            </a>
+
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="{{ route('logout') }}"
+                                onclick="event.preventDefault();
+                                                document.getElementById('logout-form').submit();">
+                                    {{ __('Logout') }}
+                                </a>
+
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                    @csrf
+                                </form>
+                            </div>
+                        </li>
+                    @endguest
                 </ul>
+
+                <!-- Menú desplegable con las opciones nuevas -->
+
                 <script>
                     document.addEventListener('DOMContentLoaded', function () {
-        // Selecciona todos los botones con el ID "guardar-alumno"
-        const cerrar_sesion = document.querySelector('#cerrar_sesion');
+                        // Selecciona todos los botones con el ID "guardar-alumno"
+                        const cerrar_sesion = document.querySelector('#cerrar_sesion');
 
-        cerrar_sesion.addEventListener('click', (event) => {
-            event.preventDefault(); 
-            Swal.fire({
-                title: 'Quieres Cerrar sesion?',
-                showDenyButton: true,
-                confirmButtonText: 'Cerrar sesion',
-                denyButtonText: `Permanecer en la Pagina`,
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    Swal.fire({
-         position: "center",
-         icon: "success",
-         title: "Sesion cerrada ",
-         showConfirmButton: false,
-             timer: 15500
-});
-                    // Aquí puedes enviar el formulario manualmente
-                    const form = event.target.closest('form');
-                    form.submit();
-                }
-            });
-        });
-    });
+                        cerrar_sesion.addEventListener('click', (event) => {
+                            event.preventDefault(); 
+                            Swal.fire({
+                                title: '¿Quieres Cerrar sesión?',
+                                showDenyButton: true,
+                                confirmButtonText: 'Cerrar sesión',
+                                denyButtonText: 'Permanecer en la Página',
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    Swal.fire({
+                                        position: 'center',
+                                        icon: 'success',
+                                        title: 'Sesión cerrada',
+                                        showConfirmButton: false,
+                                        timer: 15500
+                                    });
+                                    // Aquí puedes enviar el formulario manualmente
+                                    const form = event.target.closest('form');
+                                    form.submit();
+                                }
+                            });
+                        });
+                    });
                 </script>
             </div>
         @endif
